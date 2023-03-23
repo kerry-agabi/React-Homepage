@@ -18,7 +18,7 @@ import Advertise from './components/pages/Advertise';
 import JobCard from './components/pages/JobCard';
 import Job from './Job';
 import DashboardSeeker from './components/pages/DashboardSeeker';
-import ViewDashboard from './components/pages/ViewDashboard';
+import UpdateDashboard from './components/pages/UpdateDashboard';
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
       <Routes>
 
         <Route path ='/' exact element = {<Home/>} />
-        <Route path = "/dashboard" element={<PrivateRoute> <ViewDashboard/> </PrivateRoute>}/>
+        <Route path = "/dashboard" element={<PrivateRoute> <Dashboard/> </PrivateRoute>}/>
         <Route path ='/dashboard2' exact element = {<PrivateRoute><DashboardSeeker/></PrivateRoute>} />
         <Route path ='/jobs' exact element = {<JobCard/>} />
         <Route path ='/job2' exact element = {<Job/>} />

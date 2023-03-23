@@ -27,7 +27,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
 
 
       const handleImageUpload = async () => {
-        const storageRef = ref(storage, `Images/${imageFile.name}`);
+        const storageRef = ref(storage, `images/${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
     
         uploadTask.on(
@@ -49,7 +49,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
       };
 
         // Update createJob to include imageURL parameter
-      const createJob = async (ImageUrl) => {
+      const createJob = async (ImageURL) => {
 
 
         await addDoc(jobsCollectionRef, {
@@ -61,7 +61,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
           Skills: newSkills,
           date: newdate,
           Link: newLink,
-          ImageUrl: ImageUrl,
+          ImageURL: ImageURL,
          
 
         });
@@ -69,26 +69,14 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
       }
 
        // Handle form submission
-       const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (imageFile) {
-          await handleImageUpload();
-        } else {
-          await createJob('');
-        }
-      
-        // Reset form fields
-        setNewCompany('');
-        setNewContract('');
-        setNewJobDescription('');
-        setNewJobTitle('');
-        setNewLocation('');
-        setNewSkills('');
-        setNewdate('');
-        setNewLink('');
-        setImageFile(null);
-        setUploadProgress(0);
-      };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (imageFile) {
+      await handleImageUpload();
+    } else {
+      await createJob('');
+    }
+  };
     
       
         
@@ -98,7 +86,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
             <Card.Header>Advertise with us 🤳</Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="name-for-my-form">
+                <Form.Group controlId="formCompanyName">
                   <Form.Label>Company Name</Form.Label>
                   <Form.Control
                     type="text"
@@ -108,7 +96,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                   />
                 </Form.Group>
 
-                <Form.Group controlId="upload-for-my-form" className="mt-3">
+                <Form.Group controlId="formImageUpload" className="mt-3">
                   <Form.Label>Company Logo</Form.Label>
                   <Form.Control
                     type="file"
@@ -122,7 +110,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                   )}
                 </Form.Group>
 
-                <Form.Group controlId="contract-for-my-form" className="mt-3">
+                <Form.Group controlId="formContract" className="mt-3">
                   <Form.Label>Contract</Form.Label>
                   <Form.Control
                     type="text"
@@ -131,7 +119,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     onChange={(event) => setNewContract(event.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="description-for-my-from" className="mt-3">
+                <Form.Group controlId="formJobDescription" className="mt-3">
                   <Form.Label>Job description</Form.Label>
                   <Form.Control
                     as="textarea"
@@ -143,7 +131,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     }
                   />
                 </Form.Group>
-                <Form.Group controlId="my-date-input" className="mt-3">
+                <Form.Group controlId="formDate" className="mt-3">
                   <Form.Label>Enter a date:</Form.Label>
                   <Form.Control
                     type="date"
@@ -153,7 +141,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     onChange={(event) => setNewdate(event.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="Title-for-my-form" className="mt-3">
+                <Form.Group controlId="formJobTitle" className="mt-3">
                   <Form.Label>Job title</Form.Label>
                   <Form.Control
                     type="text"
@@ -162,7 +150,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     onChange={(event) => setNewJobTitle(event.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="location-for-my-form" className="mt-3">
+                <Form.Group controlId="formLocation" className="mt-3">
                   <Form.Label>Location</Form.Label>
                   <Form.Control
                     type="text"
@@ -171,7 +159,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     onChange={(event) => setNewLocation(event.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="skills-for-my-form" className="mt-3">
+                <Form.Group controlId="formSkills" className="mt-3">
                   <Form.Label>Skills</Form.Label>
                   <Form.Control
                     type="text"
@@ -181,7 +169,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                   />
                 </Form.Group>
 
-                <Form.Group controlId="Link-for-my-form" className="mt-3">
+                <Form.Group controlId="formLink" className="mt-3">
                   <Form.Label>Enter Job Application link</Form.Label>
                   <Form.Control
                     type="text"

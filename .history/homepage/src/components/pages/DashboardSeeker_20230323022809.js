@@ -270,6 +270,15 @@ const handleExperienceSubmit = (event) => {
                   </Form.Group>
                 </Col>
               </Row>
+              {/* <Form.Group controlId="formAddress">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter address"
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
+              />
+            </Form.Group> */}
               <br></br>
               <Button variant="primary" type="submit">
                 Save

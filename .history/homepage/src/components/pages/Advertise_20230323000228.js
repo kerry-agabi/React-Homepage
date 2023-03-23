@@ -27,7 +27,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
 
 
       const handleImageUpload = async () => {
-        const storageRef = ref(storage, `Images/${imageFile.name}`);
+        const storageRef = ref(storage, `images/${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
     
         uploadTask.on(
@@ -49,7 +49,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
       };
 
         // Update createJob to include imageURL parameter
-      const createJob = async (ImageUrl) => {
+      const createJob = async (ImageURL) => {
 
 
         await addDoc(jobsCollectionRef, {
@@ -61,7 +61,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
           Skills: newSkills,
           date: newdate,
           Link: newLink,
-          ImageUrl: ImageUrl,
+          ImageURL: ImageURL,
          
 
         });
@@ -69,26 +69,14 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
       }
 
        // Handle form submission
-       const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (imageFile) {
-          await handleImageUpload();
-        } else {
-          await createJob('');
-        }
-      
-        // Reset form fields
-        setNewCompany('');
-        setNewContract('');
-        setNewJobDescription('');
-        setNewJobTitle('');
-        setNewLocation('');
-        setNewSkills('');
-        setNewdate('');
-        setNewLink('');
-        setImageFile(null);
-        setUploadProgress(0);
-      };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (imageFile) {
+      await handleImageUpload();
+    } else {
+      await createJob('');
+    }
+  };
     
       
         

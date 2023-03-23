@@ -69,26 +69,14 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
       }
 
        // Handle form submission
-       const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (imageFile) {
-          await handleImageUpload();
-        } else {
-          await createJob('');
-        }
-      
-        // Reset form fields
-        setNewCompany('');
-        setNewContract('');
-        setNewJobDescription('');
-        setNewJobTitle('');
-        setNewLocation('');
-        setNewSkills('');
-        setNewdate('');
-        setNewLink('');
-        setImageFile(null);
-        setUploadProgress(0);
-      };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (imageFile) {
+      await handleImageUpload();
+    } else {
+      await createJob('');
+    }
+  };
     
       
         
@@ -112,7 +100,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                   <Form.Label>Company Logo</Form.Label>
                   <Form.Control
                     type="file"
-                    accept="image/*"
+                    accept="Image/*"
                     onChange={(event) => setImageFile(event.target.files[0])}
                   />
                   {uploadProgress > 0 && (

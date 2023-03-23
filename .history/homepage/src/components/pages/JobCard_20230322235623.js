@@ -41,7 +41,7 @@ function JobCard() {
   {jobs.map((job) => {
 
       return (
-        <Card className="mb-3" key={job.id}>
+        <Card className="mb-3">
           <Card.Body>
             <div className="d-flex justify-content-between">
               <div>
@@ -55,7 +55,7 @@ function JobCard() {
                     right: "0",
                     padding: "10px",
                   }}
-                  alt={job.company}
+                  alt={job.Company}
                   src={job.ImageUrl}
                 />
                 <Card.Title>
