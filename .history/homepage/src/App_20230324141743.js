@@ -19,7 +19,6 @@ import JobCard from './components/pages/JobCard';
 import Job from './Job';
 import DashboardSeeker from './components/pages/DashboardSeeker';
 import ViewDashboard from './components/pages/ViewDashboard';
-import JobApplication from './JobApplication';
 
 
 function App() {
@@ -45,7 +44,6 @@ function App() {
         <Route path ='/job2' exact element = {<Job/>} />
         <Route path ='/products' exact element = {<Products/>} />
         <Route path ='/advertise' exact element = {<PrivateRoute> <Advertise/> </PrivateRoute>} />
-        <Route path ='/jobapplication' exact element = {<PrivateRoute> <JobApplication/> </PrivateRoute>} />
         <Route path ='/signup' exact element = {<SignUp/>} />
         <Route path ='/login' exact element = {<Login/>} />
         <Route path="/forgot-password" element= {<ForgotPassword/>}/>

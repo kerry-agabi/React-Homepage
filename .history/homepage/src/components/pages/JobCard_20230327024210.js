@@ -13,7 +13,7 @@ function JobCard() {
   const jobsCollectionRef = collection(db, "jobs")
   const navigate = useNavigate();
   const handleApplyNow = () => {
-    navigate('/jobapplication');
+    navigate('/job-application');
   };
 
   useEffect(() => {

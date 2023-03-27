@@ -2,7 +2,6 @@ import { useState, useEffect} from 'react';
 import  'firebase/compat/firestore';
 import '../../File.css'
 import {db} from '../../firebase'
-import { useNavigate } from "react-router-dom"; 
 import { collection, getDocs } from 'firebase/firestore';
 import { Card, Badge, Button, Collapse } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
@@ -11,10 +10,8 @@ function JobCard() {
 
   const[jobs, setjobs] = useState([])
   const jobsCollectionRef = collection(db, "jobs")
-  const navigate = useNavigate();
-  const handleApplyNow = () => {
-    navigate('/jobapplication');
-  };
+  
+
 
   useEffect(() => {
     const getjobs = async () => {
@@ -34,53 +31,14 @@ function JobCard() {
     }))
   }
 
-  const [titleFilter, setTitleFilter] = useState("");
-  const [locationFilter, setLocationFilter] = useState("");
-  const [skillsFilter, setSkillsFilter] = useState("");
-
-  const filteredJobs = jobs.filter((job) => {
-    const titleMatch = job.JobTitle.toLowerCase().includes(titleFilter.toLowerCase());
-    const locationMatch = job.Location.toLowerCase().includes(locationFilter.toLowerCase());
-    const skillsMatch = job.Skills.some((skill) =>
-      skill.toLowerCase().includes(skillsFilter.toLowerCase())
-    );
-
-    return titleMatch && locationMatch && skillsMatch;
-  });
-
  return (
 
 
   <div className='mt-4'>
- <div className="d-flex justify-content-between mb-4">
-        <input
-          type="text"
-          placeholder="Filter by Job Title"
-          value={titleFilter}
-          onChange={(e) => setTitleFilter(e.target.value)}
-          className="form-control mr-2"
-          style={{ width: "32%" }}
-        />
-        <input
-          type="text"
-          placeholder="Filter by Location"
-          value={locationFilter}
-          onChange={(e) => setLocationFilter(e.target.value)}
-          className="form-control mr-2"
-          style={{ width: "32%" }}
-        />
-        <input
-          type="text"
-          placeholder="Filter by Skills"
-          value={skillsFilter}
-          onChange={(e) => setSkillsFilter(e.target.value)}
-          className="form-control"
-          style={{ width: "32%" }}
-        />
-      </div>
+
    
  
-      {filteredJobs.map((job) => {
+  {jobs.map((job) => {
 
       return (
         <Card className="mb-3" key={job.id}>
@@ -109,10 +67,10 @@ function JobCard() {
                 <Card.Subtitle>
                   {new Date(job.date).toLocaleDateString()}
                 </Card.Subtitle>
-                <Badge bg="dark" className="mr-2 mt-2 ">
+                <Badge bg="secondary" className="mr-2 mt-2 ">
                   {job.Contract}
                 </Badge>
-                <Badge bg="dark" className="mb-2">
+                <Badge bg="secondary" className="mb-2">
                   {job.Location}
                 </Badge>
 
@@ -132,20 +90,11 @@ function JobCard() {
               >
                 {job.open ? "Hide Details" : "View Details"}
               </Button>{" "}
-              <Button
-                onClick={handleApplyNow}
-                style={{ Bottom: "1px" }}
-                variant="info"
-              >
-                Apply Now
-              </Button>{" "}
             </Card.Text>
 
-            {job.Skills.map((skill, index) => (
-              <Badge key={index} bg="secondary" className="mb-2 mr-2">
-                {skill}
-              </Badge>
-            ))}
+            <Badge bg="secondary" className="mb-2">
+                  {job.Skills}
+                </Badge>
 
             <Collapse in={job.open}>
               <div className="mt-4">

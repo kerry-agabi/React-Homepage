@@ -3,7 +3,7 @@ import  'firebase/compat/firestore';
 import '../../File.css'
 import {db, storage} from '../../firebase'
 import { Card, Form, Button, Row, Col, Container, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; 
+import { useHistory } from "react-router-dom"; 
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 
@@ -14,14 +14,14 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
 
 
     const [alertVisible, setAlertVisible] = useState(false);
-   const navigate = useNavigate();
+   const history = useHistory();
      // Handle navigation
   const navigateToHomePage = () => {
-    navigate("/");
+    history.push("/");
   };
 
   const navigateToAdvertisePage = () => {
-    navigate("/advertise");
+    history.push("/advertise");
   };
     
       const [newCompany, setNewCompany] = useState("")
@@ -107,7 +107,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
         // Hide the alert after 3 seconds
         setTimeout(() => {
           setAlertVisible(false);
-        }, 10000);
+        }, 3000);
       };
     
       

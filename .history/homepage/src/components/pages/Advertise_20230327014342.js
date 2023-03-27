@@ -107,7 +107,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
         // Hide the alert after 3 seconds
         setTimeout(() => {
           setAlertVisible(false);
-        }, 10000);
+        }, 3000);
       };
     
       

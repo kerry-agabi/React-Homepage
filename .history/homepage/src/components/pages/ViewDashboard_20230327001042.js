@@ -63,11 +63,10 @@ function ViewDashboard() {
                 <br />
                 Address: {userData.address || "Not Provided"}
               </p>
-             
+              <h4>Work Experience</h4>
               {userData.workExperiences ? (
                 userData.workExperiences.map((experience, index) => (
                   <div key={index}>
-                     <h4>Work Experience</h4>
                     <p>
                       Job Title: {experience.JobTitle || "Not Provided"}
                       <br />

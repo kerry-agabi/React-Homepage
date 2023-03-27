@@ -3,7 +3,7 @@ import  'firebase/compat/firestore';
 import '../../File.css'
 import {db, storage} from '../../firebase'
 import { Card, Form, Button, Row, Col, Container, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; 
+import { useHistory } from "react-router-dom"; 
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 
@@ -11,17 +11,14 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
 
    
    function Advertise() {
-
-
-    const [alertVisible, setAlertVisible] = useState(false);
-   const navigate = useNavigate();
+   const history = useHistory();
      // Handle navigation
   const navigateToHomePage = () => {
-    navigate("/");
+    history.push("/");
   };
 
   const navigateToAdvertisePage = () => {
-    navigate("/advertise");
+    history.push("/advertise");
   };
     
       const [newCompany, setNewCompany] = useState("")
@@ -83,6 +80,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
 
       }
 
+       // Handle form submission
        const handleSubmit = async (event) => {
         event.preventDefault();
         if (imageFile) {
@@ -102,18 +100,11 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
         setNewLink('');
         setImageFile(null);
         setUploadProgress(0);
-        setAlertVisible(true);
-
-        // Hide the alert after 3 seconds
-        setTimeout(() => {
-          setAlertVisible(false);
-        }, 10000);
       };
     
       
         
       return (
-
         <Container className="d-flex justify-content-center mx-auto mt-10">
           <Card style={{ width: "40rem" }}>
             <Card.Header>Advertise with us 🤳</Card.Header>
@@ -231,8 +222,6 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
           </Card>
         </Container>
       );
-      
    }
-  
    
     export default Advertise;

@@ -59,27 +59,6 @@ function DashboardSeeker() {
         const oldCvRef = ref(storage, oldCvUrl);
         await deleteObject(oldCvRef);
       }
-
-
-      const resetWorkExperienceFields = (index) => {
-        const newWorkExperiences = [...workExperiences];
-        newWorkExperiences[index] = {
-          JobTitle: "",
-          industry: "",
-          CompanyName: "",
-          location: "",
-        };
-        setWorkExperiences(newWorkExperiences);
-      };
-      
-      const handleExperienceSubmit = (event, index) => {
-        event.preventDefault();
-        const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/workExperiences`);
-        jobSeekerRef.child(index).update(workExperiences[index]);
-      
-        // Call the function to reset the fields after updating the data
-        resetWorkExperienceFields(index);
-      };
       // Upload the new CV file to Firebase Storage
   const uploadTask = uploadBytesResumable(storageRef, cvFile);
 

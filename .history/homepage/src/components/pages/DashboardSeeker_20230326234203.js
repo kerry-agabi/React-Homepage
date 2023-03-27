@@ -14,12 +14,6 @@ function DashboardSeeker() {
     const addWorkExperience = () => {
       setWorkExperiences([...workExperiences, { JobTitle: "", industry: "", CompanyName: "", location: "" }]);
     };
-
-    
-
-    const removeWorkExperience = (index) => {
-      setWorkExperiences(workExperiences.filter((_, i) => i !== index));
-    };
     async function handleLogout(){
 
         setError('')
@@ -59,27 +53,6 @@ function DashboardSeeker() {
         const oldCvRef = ref(storage, oldCvUrl);
         await deleteObject(oldCvRef);
       }
-
-
-      const resetWorkExperienceFields = (index) => {
-        const newWorkExperiences = [...workExperiences];
-        newWorkExperiences[index] = {
-          JobTitle: "",
-          industry: "",
-          CompanyName: "",
-          location: "",
-        };
-        setWorkExperiences(newWorkExperiences);
-      };
-      
-      const handleExperienceSubmit = (event, index) => {
-        event.preventDefault();
-        const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/workExperiences`);
-        jobSeekerRef.child(index).update(workExperiences[index]);
-      
-        // Call the function to reset the fields after updating the data
-        resetWorkExperienceFields(index);
-      };
       // Upload the new CV file to Firebase Storage
   const uploadTask = uploadBytesResumable(storageRef, cvFile);
 
@@ -241,99 +214,22 @@ const handleExperienceSubmit = (event, index) => {
         >
           <Card.Header>Work Experience</Card.Header>
           <Card.Body>
-          {workExperiences.map((workExperience, index) => (
-  <div key={index}>
-    <Form key={index} onSubmit={(event) => handleExperienceSubmit(event, index)}>
-      <Row>
-        <Col>
-          <Form.Group controlId={`formJobTitle${index}`}>
-            <Form.Label>Job Title</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter the Job Title"
-              value={workExperience.JobTitle}
-              onChange={(event) => {
-                const newWorkExperiences = [...workExperiences];
-                newWorkExperiences[index].JobTitle = event.target.value;
-                setWorkExperiences(newWorkExperiences);
-              }}
-            />
-          </Form.Group>
-        </Col>
-        <Col>
-          <Form.Group controlId={`formIndustry${index}`}>
-            <Form.Label> Industry </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter the industry"
-              value={workExperience.industry}
-              onChange={(event) => {
-                const newWorkExperiences = [...workExperiences];
-                newWorkExperiences[index].industry = event.target.value;
-                setWorkExperiences(newWorkExperiences);
-              }}
-            />
-          </Form.Group>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Form.Group controlId={`formCompanyName${index}`} className="mt-3">
-            <Form.Label>Company Name </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter the Company Name"
-              value={workExperience.CompanyName}
-              onChange={(event) => {
-                const newWorkExperiences = [...workExperiences];
-                newWorkExperiences[index].CompanyName = event.target.value;
-                setWorkExperiences(newWorkExperiences);
-              }}
-            />
-          </Form.Group>
-        </Col>
-        <Col>
-          <Form.Group controlId={`formLocation${index}`} className="mt-3">
-            <Form.Label>Company Location</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter the location"
-              value={workExperience.location}
-              onChange={(event) => {
-                const newWorkExperiences = [...workExperiences];
-                newWorkExperiences[index].location = event.target.value;
-                setWorkExperiences(newWorkExperiences);
-              }}
-            />
-          </Form.Group>
-        </Col>
-      </Row>
-      <br></br>
-      <Button className="mb-4" variant="primary" type="submit">
-        Save
-      </Button>
-      <br />
-      <Button
-        className="mb-4"
-        variant="danger"
-        onClick={() => removeWorkExperience(index)}
-      >
-        Remove
-      </Button>
-    </Form>
-
-    {index < workExperiences.length - 1 && <hr />}{" "}
-  </div>
-))}
-
-            
-          
-          
-          <Button variant="secondary" onClick={addWorkExperience}>
+        {/* Map over the workExperiences state array to render multiple work experience forms */}
+        {workExperiences.map((workExperience, index) => (
+          <Form key={index} onSubmit={(event) => handleExperienceSubmit(event, index)}>
+            {/* ... Work Experience form fields */}
+            <br></br>
+            <Button variant="primary" type="submit">
+              Save
+            </Button>
+            <hr />
+          </Form>
+        ))}
+        {/* Add a button to call the addWorkExperience function */}
+        <Button variant="secondary" onClick={addWorkExperience}>
           + Add another work experience
         </Button>
-            
-          </Card.Body>
+      </Card.Body>
         </Card>
 
         <Card

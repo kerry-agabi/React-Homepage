@@ -2,7 +2,6 @@ import { useState, useEffect} from 'react';
 import  'firebase/compat/firestore';
 import '../../File.css'
 import {db} from '../../firebase'
-import { useNavigate } from "react-router-dom"; 
 import { collection, getDocs } from 'firebase/firestore';
 import { Card, Badge, Button, Collapse } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
@@ -11,10 +10,8 @@ function JobCard() {
 
   const[jobs, setjobs] = useState([])
   const jobsCollectionRef = collection(db, "jobs")
-  const navigate = useNavigate();
-  const handleApplyNow = () => {
-    navigate('/jobapplication');
-  };
+  
+
 
   useEffect(() => {
     const getjobs = async () => {
@@ -131,13 +128,6 @@ function JobCard() {
                 variant="primary"
               >
                 {job.open ? "Hide Details" : "View Details"}
-              </Button>{" "}
-              <Button
-                onClick={handleApplyNow}
-                style={{ Bottom: "1px" }}
-                variant="info"
-              >
-                Apply Now
               </Button>{" "}
             </Card.Text>
 

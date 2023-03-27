@@ -13,7 +13,7 @@ function JobCard() {
   const jobsCollectionRef = collection(db, "jobs")
   const navigate = useNavigate();
   const handleApplyNow = () => {
-    navigate('/jobapplication');
+    navigate('/job-application');
   };
 
   useEffect(() => {
@@ -135,7 +135,7 @@ function JobCard() {
               <Button
                 onClick={handleApplyNow}
                 style={{ Bottom: "1px" }}
-                variant="info"
+                variant="infor"
               >
                 Apply Now
               </Button>{" "}
