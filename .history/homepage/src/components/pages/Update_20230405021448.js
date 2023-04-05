@@ -4,10 +4,10 @@ import '../../File.css'
 import {db} from '../../firebase'
 import { useNavigate, Link } from "react-router-dom"; 
 import { collection, getDocs } from 'firebase/firestore';
-import { Card, Badge, Button, Collapse } from 'react-bootstrap'
+import { Card, Badge, Button, Collapse, Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
 
-function JobCard() {
+function Update() {
 
   const[jobs, setjobs] = useState([])
   const jobsCollectionRef = collection(db, "jobs")
@@ -83,6 +83,7 @@ function JobCard() {
       {filteredJobs.map((job) => {
 
       return (
+        <Container>
         <Card className="mb-3" key={job.id}>
           <Card.Body>
             <div className="d-flex justify-content-between">
@@ -132,13 +133,9 @@ function JobCard() {
               >
                 {job.open ? "Hide Details" : "View Details"}
               </Button>{" "}
-              <Button
-                onClick={handleApplyNow}
-                style={{ Bottom: "1px" }}
-                variant="info"
-              >
-                Apply Now
-              </Button>{" "}
+              <Button to={`/update/${job.id}`} className="btn btn-secondary">
+              Update Job
+              </Button> {" "}
             </Card.Text>
 
             {job.Skills.map((skill, index) => (
@@ -152,9 +149,9 @@ function JobCard() {
                 <ReactMarkdown children={job.JobDescription} />
               </div>
             </Collapse>
-
           </Card.Body>
         </Card>
+        </Container>
       );
      })}
 
@@ -165,4 +162,4 @@ function JobCard() {
 
 }
 
-export default JobCard;
+export default Update;

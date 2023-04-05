@@ -22,7 +22,6 @@ import ViewDashboard from './components/pages/ViewDashboard';
 import JobApplication from './JobApplication';
 import UpdateJob from './components/pages/UpdateJob';
 import Update from './components/pages/Update';
-import Delete from './components/pages/Delete';
 
 
 function App() {
@@ -48,7 +47,6 @@ function App() {
         <Route path ='/job2' exact element = {<Job/>} />
         <Route path ='/products' exact element = {<Products/>} />
         <Route path ='/update1' exact element = {<Update/>} />
-        <Route path ='/delete' exact element = {<Delete/>} />
         <Route path="/update/:id" element={<UpdateJob />} />
         <Route path ='/advertise' exact element = {<PrivateRoute> <Advertise/> </PrivateRoute>} />
         <Route path ='/jobapplication' exact element = {<PrivateRoute> <JobApplication/> </PrivateRoute>} />

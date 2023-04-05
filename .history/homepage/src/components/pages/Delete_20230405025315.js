@@ -4,10 +4,11 @@ import '../../File.css'
 import {db} from '../../firebase'
 import { useNavigate, Link } from "react-router-dom"; 
 import { collection, getDocs } from 'firebase/firestore';
-import { Card, Badge, Button, Collapse } from 'react-bootstrap'
+import { Card, Badge, Button, Collapse, Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
+import DeleteJob from './DeleteJob';
 
-function JobCard() {
+function Delete() {
 
   const[jobs, setjobs] = useState([])
   const jobsCollectionRef = collection(db, "jobs")
@@ -49,9 +50,11 @@ function JobCard() {
   });
 
  return (
+    
 
 
   <div className='mt-4'>
+    <Container>
  <div className="d-flex justify-content-between mb-4">
         <input
           type="text"
@@ -83,6 +86,7 @@ function JobCard() {
       {filteredJobs.map((job) => {
 
       return (
+        
         <Card className="mb-3" key={job.id}>
           <Card.Body>
             <div className="d-flex justify-content-between">
@@ -128,17 +132,11 @@ function JobCard() {
               <Button
                 onClick={() => toggleOpen(job.id)}
                 style={{ Bottom: "1px" }}
-                variant="primary"
+                variant="secondary"
               >
                 {job.open ? "Hide Details" : "View Details"}
               </Button>{" "}
-              <Button
-                onClick={handleApplyNow}
-                style={{ Bottom: "1px" }}
-                variant="info"
-              >
-                Apply Now
-              </Button>{" "}
+             <DeleteJob id={job.id} />
             </Card.Text>
 
             {job.Skills.map((skill, index) => (
@@ -152,17 +150,18 @@ function JobCard() {
                 <ReactMarkdown children={job.JobDescription} />
               </div>
             </Collapse>
-
           </Card.Body>
         </Card>
+       
       );
      })}
 
-
-</div> )
+</Container>
+</div>
+ )
 
 
 
 }
 
-export default JobCard;
+export default Delete;

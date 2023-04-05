@@ -2,7 +2,7 @@ import { useState, useEffect} from 'react';
 import  'firebase/compat/firestore';
 import '../../File.css'
 import {db} from '../../firebase'
-import { useNavigate, Link } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom"; 
 import { collection, getDocs } from 'firebase/firestore';
 import { Card, Badge, Button, Collapse } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
@@ -152,7 +152,9 @@ function JobCard() {
                 <ReactMarkdown children={job.JobDescription} />
               </div>
             </Collapse>
-
+            <Link to={`/update/${id}`} className="btn btn-secondary">
+    Update Job
+  </Link>
           </Card.Body>
         </Card>
       );
