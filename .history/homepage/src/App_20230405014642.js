@@ -4,7 +4,7 @@ import'./components/FontawesomeIcons';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './components/pages/Home'
-// import Services from './components/pages/Services'
+import Services from './components/pages/Services'
 import Products from './components/pages/Products'
 import SignUp from './components/pages/SignUp'
 import './components/HeroSection.css'
@@ -21,8 +21,6 @@ import DashboardSeeker from './components/pages/DashboardSeeker';
 import ViewDashboard from './components/pages/ViewDashboard';
 import JobApplication from './JobApplication';
 import UpdateJob from './components/pages/UpdateJob';
-import Update from './components/pages/Update';
-import Delete from './components/pages/Delete';
 
 
 function App() {
@@ -47,8 +45,6 @@ function App() {
         <Route path ='/jobs' exact element = {<JobCard/>} />
         <Route path ='/job2' exact element = {<Job/>} />
         <Route path ='/products' exact element = {<Products/>} />
-        <Route path ='/update1' exact element = {<Update/>} />
-        <Route path ='/delete' exact element = {<Delete/>} />
         <Route path="/update/:id" element={<UpdateJob />} />
         <Route path ='/advertise' exact element = {<PrivateRoute> <Advertise/> </PrivateRoute>} />
         <Route path ='/jobapplication' exact element = {<PrivateRoute> <JobApplication/> </PrivateRoute>} />

@@ -7,7 +7,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { Card, Badge, Button, Collapse } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
 
-function JobCard() {
+function Update() {
 
   const[jobs, setjobs] = useState([])
   const jobsCollectionRef = collection(db, "jobs")
@@ -152,7 +152,9 @@ function JobCard() {
                 <ReactMarkdown children={job.JobDescription} />
               </div>
             </Collapse>
-
+            <Link to={`/update/${job.id}`} className="btn btn-secondary">
+    Update Job
+  </Link>
           </Card.Body>
         </Card>
       );
@@ -165,4 +167,4 @@ function JobCard() {
 
 }
 
-export default JobCard;
+export default Update;

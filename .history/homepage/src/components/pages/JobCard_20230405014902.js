@@ -152,7 +152,9 @@ function JobCard() {
                 <ReactMarkdown children={job.JobDescription} />
               </div>
             </Collapse>
-
+            <Link to={`/update/${id}`} className="btn btn-secondary">
+    Update Job
+  </Link>
           </Card.Body>
         </Card>
       );

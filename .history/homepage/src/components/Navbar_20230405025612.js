@@ -46,7 +46,7 @@ function Navbar() {
       <nav className="navbar">
         <div className="navbar-container">
         <Link to = "/" className="navbar-logo" align="center" onClick={closeMobileMenu}>
-        Recruitment Agency <i className='fa-solid fa-user-plus' paddingRight='500px' />
+        Recruitment Agency <i className='fa-solid fa-user-plus' paddingright='500px' />
             
              </Link>
              

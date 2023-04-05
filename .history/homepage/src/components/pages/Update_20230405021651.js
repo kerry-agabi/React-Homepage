@@ -4,10 +4,10 @@ import '../../File.css'
 import {db} from '../../firebase'
 import { useNavigate, Link } from "react-router-dom"; 
 import { collection, getDocs } from 'firebase/firestore';
-import { Card, Badge, Button, Collapse } from 'react-bootstrap'
+import { Card, Badge, Button, Collapse, Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
 
-function JobCard() {
+function Update() {
 
   const[jobs, setjobs] = useState([])
   const jobsCollectionRef = collection(db, "jobs")
@@ -49,9 +49,11 @@ function JobCard() {
   });
 
  return (
+    
 
 
   <div className='mt-4'>
+    <Container>
  <div className="d-flex justify-content-between mb-4">
         <input
           type="text"
@@ -83,6 +85,7 @@ function JobCard() {
       {filteredJobs.map((job) => {
 
       return (
+        
         <Card className="mb-3" key={job.id}>
           <Card.Body>
             <div className="d-flex justify-content-between">
@@ -128,17 +131,13 @@ function JobCard() {
               <Button
                 onClick={() => toggleOpen(job.id)}
                 style={{ Bottom: "1px" }}
-                variant="primary"
+                variant="secondary"
               >
                 {job.open ? "Hide Details" : "View Details"}
               </Button>{" "}
-              <Button
-                onClick={handleApplyNow}
-                style={{ Bottom: "1px" }}
-                variant="info"
-              >
-                Apply Now
-              </Button>{" "}
+              <Button to={`/update/${job.id}`} className="btn btn-primary">
+              Update Job
+              </Button> {" "}
             </Card.Text>
 
             {job.Skills.map((skill, index) => (
@@ -152,17 +151,18 @@ function JobCard() {
                 <ReactMarkdown children={job.JobDescription} />
               </div>
             </Collapse>
-
           </Card.Body>
         </Card>
+       
       );
      })}
 
-
-</div> )
+</Container>
+</div>
+ )
 
 
 
 }
 
-export default JobCard;
+export default Update;
