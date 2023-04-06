@@ -10,12 +10,6 @@ function DashboardSeeker() {
     const [error, setError] = useState("")
     const {currentUser, logout} = useAuth()
     const navigate = useNavigate()
-    const [isEmployed, setIsEmployed] = useState(false);
-    const [salaryExpectation, setSalaryExpectation] = useState("");
-    const [contractPreference, setContractPreference] = useState("");
-    const [worksitePreference, setWorksitePreference] = useState("");
-    const [skills, setSkills] = useState([]);
-
     const [workExperiences, setWorkExperiences] = useState([{ JobTitle: "", industry: "", CompanyName: "", location: "" }]);
     const addWorkExperience = () => {
       setWorkExperiences([...workExperiences, { JobTitle: "", industry: "", CompanyName: "", location: "" }]);
@@ -33,24 +27,15 @@ function DashboardSeeker() {
   const removeEducation = (index) => {
     setEducations(educations.filter((_, i) => i !== index));
   };
-
-  const resetEducationFields = (index) => {
-    const newEducations = [...educations];
-    newEducations[index] = {
-      CourseTitle: "",
-      Qualification: "",
-      Institution: "",
-      CompletionDate: "",
-    };
-    setEducations(newEducations);
-  };
+  
   const handleEducationSubmit = (event, index) => {
     event.preventDefault();
     const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/educations`);
     jobSeekerRef.child(index).update(educations[index]);
-    resetEducationFields(index);
   };
-  
+
+    
+
 
     async function handleLogout(){
 
@@ -64,18 +49,26 @@ function DashboardSeeker() {
         } catch{
 
             setError('Failed to log out')
+
+
         }
+
+
+
     }
- const handleSubmit = async (event) => {
+
+    const handleSubmit = async (event) => {
       event.preventDefault();
     
       if (!cvFile) {
         alert("Please choose a file");
         return;
       }
+    
       // Create a reference to the file in Firebase Storage
       const storageRef = ref(storage, `cvs/${currentUser.uid}/${cvFile.name}`);
-    // Delete the old CV file if it exists
+    
+      // Delete the old CV file if it exists
       const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}`);
       const oldCvUrlSnapshot = await jobSeekerRef.child("cvUrl").get();
       if (oldCvUrlSnapshot.exists()) {
@@ -83,6 +76,27 @@ function DashboardSeeker() {
         const oldCvRef = ref(storage, oldCvUrl);
         await deleteObject(oldCvRef);
       }
+
+
+      const resetWorkExperienceFields = (index) => {
+        const newWorkExperiences = [...workExperiences];
+        newWorkExperiences[index] = {
+          JobTitle: "",
+          industry: "",
+          CompanyName: "",
+          location: "",
+        };
+        setWorkExperiences(newWorkExperiences);
+      };
+      
+      const handleExperienceSubmit = (event, index) => {
+        event.preventDefault();
+        const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/workExperiences`);
+        jobSeekerRef.child(index).update(workExperiences[index]);
+      
+        // Call the function to reset the fields after updating the data
+        resetWorkExperienceFields(index);
+      };
       // Upload the new CV file to Firebase Storage
   const uploadTask = uploadBytesResumable(storageRef, cvFile);
 
@@ -115,7 +129,8 @@ const [cvFile, setCvFile] = useState(null);
     const handleFileChange = (event) => {
       setCvFile(event.target.files[0]);
     };
-const [firstName, setFirstName] = useState("");
+
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -124,7 +139,9 @@ const [firstName, setFirstName] = useState("");
   const [CompanyName, setCompanyName] = useState("");
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
-const handlePersonalSubmit = (event) => {
+
+
+ const handlePersonalSubmit = (event) => {
   event.preventDefault();
   const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}`);
   jobSeekerRef.update({
@@ -140,38 +157,12 @@ const handlePersonalSubmit = (event) => {
   setPhone("");
   setAddress("");
 };
-const resetWorkExperienceFields = (index) => {
-  const newWorkExperiences = [...workExperiences];
-  newWorkExperiences[index] = {
-    JobTitle: "",
-    industry: "",
-    CompanyName: "",
-    location: "",
-  };
-  setWorkExperiences(newWorkExperiences);
-};
+
 
 const handleExperienceSubmit = (event, index) => {
   event.preventDefault();
   const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/workExperiences`);
   jobSeekerRef.child(index).update(workExperiences[index]);
-    // Call the function to reset the fields after updating the data
-    resetWorkExperienceFields(index);
-  
-};
-
-const handleCareerInfoSubmit = (event) => {
-  event.preventDefault();
-  const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}`);
-  jobSeekerRef.update({
-    careerInformation: {
-      isEmployed,
-      salaryExpectation,
-      contractPreference,
-      worksitePreference,
-      skills,
-    },
-  });
 };
   return (
     <div className="mt-6">
@@ -198,7 +189,7 @@ const handleCareerInfoSubmit = (event) => {
               <Row>
                 <Col>
                   <Form.Group controlId="formFirstName">
-                    <Form.Label>First Name:</Form.Label>
+                    <Form.Label>First Name</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Enter first name"
@@ -210,7 +201,7 @@ const handleCareerInfoSubmit = (event) => {
 
                 <Col>
                   <Form.Group controlId="formLastName">
-                    <Form.Label>Last Name:</Form.Label>
+                    <Form.Label>Last Name</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Enter last name"
@@ -223,7 +214,7 @@ const handleCareerInfoSubmit = (event) => {
               <Row>
                 <Col>
                   <Form.Group controlId="formEmail" className="mt-3">
-                    <Form.Label>Email:</Form.Label>
+                    <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
                       placeholder="Enter email"
@@ -234,7 +225,7 @@ const handleCareerInfoSubmit = (event) => {
                 </Col>
                 <Col>
                   <Form.Group controlId="formPhone" className="mt-3">
-                    <Form.Label>Phone:</Form.Label>
+                    <Form.Label>Phone</Form.Label>
                     <Form.Control
                       type="tel"
                       placeholder="Enter phone number"
@@ -245,7 +236,7 @@ const handleCareerInfoSubmit = (event) => {
                 </Col>
               </Row>
               <Form.Group controlId="formAddress" className="mt-3">
-                <Form.Label>Address:</Form.Label>
+                <Form.Label>Address</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter address"
@@ -276,7 +267,7 @@ const handleCareerInfoSubmit = (event) => {
                   <Row>
                     <Col>
                       <Form.Group controlId={`formJobTitle${index}`}>
-                        <Form.Label>Job Title:</Form.Label>
+                        <Form.Label>Job Title</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter the Job Title"
@@ -292,7 +283,7 @@ const handleCareerInfoSubmit = (event) => {
                     </Col>
                     <Col>
                       <Form.Group controlId={`formIndustry${index}`}>
-                        <Form.Label> Industry: </Form.Label>
+                        <Form.Label> Industry </Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter the industry"
@@ -313,7 +304,7 @@ const handleCareerInfoSubmit = (event) => {
                         controlId={`formCompanyName${index}`}
                         className="mt-3"
                       >
-                        <Form.Label>Company Name: </Form.Label>
+                        <Form.Label>Company Name </Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter the Company Name"
@@ -332,7 +323,7 @@ const handleCareerInfoSubmit = (event) => {
                         controlId={`formLocation${index}`}
                         className="mt-3"
                       >
-                        <Form.Label>Company Location:</Form.Label>
+                        <Form.Label>Company Location</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter the location"
@@ -348,112 +339,27 @@ const handleCareerInfoSubmit = (event) => {
                     </Col>
                   </Row>
                   <br></br>
-                  <Button className="mt-3"  variant="primary" type="submit">
+                  <Button className="mb-4" variant="primary" type="submit">
                     Save
                   </Button>
-                  {workExperiences.length > 1 && (
-                    <Button
-                      variant="danger"
-                      className="mt-3 ms-3"
-                      onClick={() => removeWorkExperience(index)}
-                    >
-                      Remove
-                    </Button>
-                  )}
+                  <br />
+                  <Button
+                    className="mb-4"
+                    variant="danger"
+                    onClick={() => removeWorkExperience(index)}
+                  >
+                    Remove
+                  </Button>
                 </Form>
-                {index !== workExperiences.length - 1 && <hr />}
+                {index < workExperiences.length - 1 && <hr />}{" "}
               </div>
             ))}
 
-            <Button variant="secondary" className="mt-3" onClick={addWorkExperience}>
+            <Button variant="secondary" onClick={addWorkExperience}>
               + Add another work experience
             </Button>
           </Card.Body>
         </Card>
-
-        <Card
-          className="mx-auto"
-          style={{ width: "40rem", marginBottom: "25px" }}
-        >
-        <Card.Body>
-          <h2 className="text-center mb-4">Career Information</h2>
-          <Form onSubmit={handleCareerInfoSubmit}>
-            <Form.Group controlId="formIsEmployed">
-              <Form.Check
-                type="checkbox"
-                label="Currently Employed"
-                checked={isEmployed}
-                onChange={(e) => setIsEmployed(e.target.checked)}
-              />
-            </Form.Group>
-            <Form.Group controlId="formSalaryExpectation">
-              <Form.Label>Salary Expectation</Form.Label>
-              <Form.Control
-                as="select"
-                value={salaryExpectation}
-                onChange={(e) => setSalaryExpectation(e.target.value)}
-              >
-                <option value="">Select</option>
-                {/* Add more options as needed */}
-                {Array.from({ length: 20 }, (_, i) => (i + 1) * 10000).map((val) => (
-                  <option key={val} value={val}>
-                    €{val}
-                  </option>
-                ))}
-                <option value="200000">€200,000 or more</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formContractPreference">
-              <Form.Label>Contract Preference</Form.Label>
-              <Form.Control
-                as="select"
-                value={contractPreference}
-                onChange={(e) => setContractPreference(e.target.value)}
-              >
-                <option value="">Select</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Fixed-Term">Fixed-Term</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formWorksitePreference">
-              <Form.Label>Work-site Preference</Form.Label>
-              <Form.Control
-                as="select"
-                value={worksitePreference}
-                onChange={(e) => setWorksitePreference(e.target.value)}
-              >
-                <option value="">Select</option>
-                <option value="On-site">On-site</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Remote">Remote</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formSkills">
-              <Form.Label>Skills</Form.Label>
-              <Form.Control
-                as="select"multiple
-                value={skills}
-                onChange={(e) =>
-                setSkills(Array.from(e.target.selectedOptions, (option) => option.value))
-                }
-                >
-                <option value="">Select</option>
-                {/* Add more options as needed */}
-                <option value="Skill1">Skill1</option>
-                <option value="Skill2">Skill2</option>
-                <option value="Skill3">Skill3</option>
-                <option value="Skill4">Skill4</option>
-                <option value="Skill5">Skill5</option>
-                </Form.Control>
-                </Form.Group>
-                <Button className="w-100" type="submit">
-                Save
-                </Button>
-                </Form>
-                </Card.Body>
-                </Card>
-
         <Card
           className="mx-auto"
           style={{ width: "40rem", marginBottom: "25px" }}
@@ -469,7 +375,7 @@ const handleCareerInfoSubmit = (event) => {
                   <Row>
                     <Col>
                       <Form.Group controlId={`formCourseTitle${index}`}>
-                        <Form.Label>Course Title:</Form.Label>
+                        <Form.Label>Course Title</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter the Course Title"
@@ -485,7 +391,7 @@ const handleCareerInfoSubmit = (event) => {
                     </Col>
                     <Col>
                       <Form.Group controlId={`formQualification${index}`}>
-                        <Form.Label>Qualification:</Form.Label>
+                        <Form.Label>Qualification</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter the Qualification"
@@ -506,7 +412,7 @@ const handleCareerInfoSubmit = (event) => {
                         controlId={`formInstitution${index}`}
                         className="mt-3"
                       >
-                        <Form.Label>Institution:</Form.Label>
+                        <Form.Label>Institution</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter the Institution"
@@ -525,7 +431,7 @@ const handleCareerInfoSubmit = (event) => {
                         controlId={`formCompletionDate${index}`}
                         className="mt-3"
                       >
-                        <Form.Label>Completion Date:</Form.Label>
+                        <Form.Label>Completion Date</Form.Label>
                         <Form.Control
                           type="date"
                           value={education.CompletionDate}

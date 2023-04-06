@@ -4,10 +4,10 @@ import '../../File.css'
 import {db} from '../../firebase'
 import { useNavigate, Link } from "react-router-dom"; 
 import { collection, getDocs } from 'firebase/firestore';
-import { Card, Badge, Button, Collapse } from 'react-bootstrap'
+import { Card, Badge, Button, Collapse, Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown';
 
-function JobCard() {
+function ViewApplications() {
 
   const[jobs, setjobs] = useState([])
   const jobsCollectionRef = collection(db, "jobs")
@@ -34,7 +34,7 @@ function JobCard() {
       }
     }))
   }
-  const [workSiteFilter, setWorkSiteFilter] = useState("");
+
   const [titleFilter, setTitleFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [skillsFilter, setSkillsFilter] = useState("");
@@ -42,60 +42,48 @@ function JobCard() {
   const filteredJobs = jobs.filter((job) => {
     const titleMatch = job.JobTitle.toLowerCase().includes(titleFilter.toLowerCase());
     const locationMatch = job.Location.toLowerCase().includes(locationFilter.toLowerCase());
-    const workSiteMatch = job.WorkSite.toLowerCase().includes(workSiteFilter.toLowerCase());
     const skillsMatch = job.Skills.some((skill) =>
       skill.toLowerCase().includes(skillsFilter.toLowerCase())
     );
 
-    return titleMatch && locationMatch && skillsMatch && workSiteMatch;
+    return titleMatch && locationMatch && skillsMatch;
   });
 
  return (
 
 
   <div className='mt-4'>
-<div className="d-flex flex-wrap justify-content-between mb-4">
-  <div className="w-50 mb-2">
-    <input
-      type="text"
-      placeholder="Filter by Job Title"
-      value={titleFilter}
-      onChange={(e) => setTitleFilter(e.target.value)}
-      className="form-control mr-2"
-      style={{ width: "95%" }}
-    />
+    <Container>
+
     
-    <input
-      type="text"
-      placeholder="Filter by Skills"
-      value={skillsFilter}
-      onChange={(e) => setSkillsFilter(e.target.value)}
-      className="form-control mt-2"
-      style={{ width: "95%" }}
-    />
-  </div>
-  <div className="w-50 mb-2">
-    <input
-      type="text"
-      placeholder="Filter by Location"
-      value={locationFilter}
-      onChange={(e) => setLocationFilter(e.target.value)}
-      className="form-control mr-2"
-      style={{ width: "95%" }}
-    />
-     <select
-            className="form-control mt-2"
-            style={{ width: '95%' }}
-            value={workSiteFilter}
-            onChange={(e) => setWorkSiteFilter(e.target.value)}
-          >
-            <option value="">Filter by Work-site</option>
-            <option value="on-site">On-site</option>
-            <option value="hybrid">Hybrid</option>
-            <option value="remote">Remote</option>
-          </select>
-  </div>
-</div>
+ <div className="d-flex justify-content-between mb-4">
+        <input
+          type="text"
+          placeholder="Filter by Job Title"
+          value={titleFilter}
+          onChange={(e) => setTitleFilter(e.target.value)}
+          className="form-control mr-2"
+          style={{ width: "32%" }}
+        />
+        <input
+          type="text"
+          placeholder="Filter by Location"
+          value={locationFilter}
+          onChange={(e) => setLocationFilter(e.target.value)}
+          className="form-control mr-2"
+          style={{ width: "32%" }}
+        />
+        <input
+          type="text"
+          placeholder="Filter by Skills"
+          value={skillsFilter}
+          onChange={(e) => setSkillsFilter(e.target.value)}
+          className="form-control"
+          style={{ width: "32%" }}
+        />
+      </div>
+   
+ 
       {filteredJobs.map((job) => {
 
       return (
@@ -128,9 +116,6 @@ function JobCard() {
                 <Badge bg="dark" className="mr-2 mt-2 ">
                   {job.Contract}
                 </Badge>
-                <Badge bg="dark" className="mr-2 mt-2 ">
-                  {job.WorkSite}
-                </Badge>
                 <Badge bg="dark" className="mb-2">
                   {job.Location}
                 </Badge>
@@ -152,11 +137,12 @@ function JobCard() {
                 {job.open ? "Hide Details" : "View Details"}
               </Button>{" "}
               <Button
+                to='/view2'
                 onClick={() => handleApplyNow(job.id)}
                 style={{ Bottom: "1px" }}
                 variant="info"
               >
-                Apply Now
+                Job Applications
               </Button>{" "}
             </Card.Text>
 
@@ -176,11 +162,11 @@ function JobCard() {
       );
      })}
 
-
+</Container>
 </div> )
 
 
 
 }
 
-export default JobCard;
+export default ViewApplications;

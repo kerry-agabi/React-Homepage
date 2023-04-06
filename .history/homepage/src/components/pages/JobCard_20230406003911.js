@@ -80,20 +80,17 @@ function JobCard() {
       placeholder="Filter by Location"
       value={locationFilter}
       onChange={(e) => setLocationFilter(e.target.value)}
-      className="form-control mr-2"
+      className="form-control mt-2"
       style={{ width: "95%" }}
     />
-     <select
-            className="form-control mt-2"
-            style={{ width: '95%' }}
-            value={workSiteFilter}
-            onChange={(e) => setWorkSiteFilter(e.target.value)}
-          >
-            <option value="">Filter by Work-site</option>
-            <option value="on-site">On-site</option>
-            <option value="hybrid">Hybrid</option>
-            <option value="remote">Remote</option>
-          </select>
+    <input
+      type="text"
+      placeholder="Filter by Work-site"
+      value={workSiteFilter}
+      onChange={(e) => setWorkSiteFilter(e.target.value)}
+      className="form-control"
+      style={{ width: "95%" }}
+    />
   </div>
 </div>
       {filteredJobs.map((job) => {

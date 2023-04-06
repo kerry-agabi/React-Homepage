@@ -1,17 +1,8 @@
 import React, { useState } from "react";
-import {
-  Card,
-  Form,
-  Button,
-  Container,
-  Row,
-  Col,
-  FormControl,
-} from "react-bootstrap";
+import {Card,Form,Button,Container,Row,Col,FormControl} from "react-bootstrap";
 import { addDoc, collection } from "firebase/firestore";
-import { db, storage } from "./firebase";
+import { db } from "../../firebase";
 import { useParams } from "react-router-dom";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 function JobApplication() {
   const [email, setEmail] = useState("");
@@ -21,54 +12,34 @@ function JobApplication() {
   const [coverNote, setCoverNote] = useState("");
   const { jobId } = useParams();
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!cvFile) {
-      alert("Please upload your CV before submitting.");
-      return;
+  
+    // Add application data to Firestore
+    try {
+      const applicationData = {
+        jobId,
+        email,
+        firstName,
+        lastName,
+        coverNote,
+        // Add cvFile to the database if necessary
+      };
+      await addDoc(collection(db, "applications"), applicationData);
+      console.log("Job application successfully submitted!");
+    } catch (error) {
+      console.error("Error submitting job application:", error);
     }
-
-    // Upload the CV file to Firebase Storage
-    const storageRef = ref(storage, `cvs/${cvFile.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, cvFile);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        // You can add a progress indicator here if needed
-      },
-      (error) => {
-        console.error("Error uploading file:", error);
-      },
-      async () => {
-        // Get the download URL for the uploaded CV file
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-
-        // Save the job application data in Firestore
-        const applicationData = {
-          jobId,
-          email,
-          firstName,
-          lastName,
-          coverNote,
-          cvFileURL: downloadURL, // Store the CV download URL in the database
-        };
-        try {
-          await addDoc(collection(db, "applications"), applicationData);
-          console.log("Form submitted");
-        } catch (error) {
-          console.error("Error adding document:", error);
-        }
-
-        // Reset the form fields
-        setEmail("");
-        setFirstName("");
-        setLastName("");
-        setCvFile(null);
-        setCoverNote("");
-      }
-    );
+  
+    // Reset form fields
+    setEmail("");
+    setFirstName("");
+    setLastName("");
+    setCvFile(null);
+    setCoverNote("");
   };
+  
 
   return (
     <Container>
@@ -83,7 +54,6 @@ function JobApplication() {
                   placeholder="Email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  required
                 />
               </Card.Body>
             </Card>
@@ -98,7 +68,6 @@ function JobApplication() {
                     placeholder="First Name"
                     value={firstName}
                     onChange={(event) => setFirstName(event.target.value)}
-                    required
                   />
                 </Form.Group>
                 <Form.Group>
@@ -108,7 +77,6 @@ function JobApplication() {
                     placeholder="Last Name"
                     value={lastName}
                     onChange={(event) => setLastName(event.target.value)}
-                    required
                   />
                 </Form.Group>
               </Card.Body>
@@ -125,7 +93,6 @@ function JobApplication() {
                 type="file"
                 accept=".pdf,.doc,.docx"
                 onChange={(event) => setCvFile(event.target.files[0])}
-                required
               />
             </Form.Group>
           </Card.Body>
@@ -140,7 +107,6 @@ function JobApplication() {
                 rows={3}
                 value={coverNote}
                 onChange={(event) => setCoverNote(event.target.value)}
-                required
               />
             </Form.Group>
           </Card.Body>

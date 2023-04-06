@@ -83,6 +83,14 @@ function JobCard() {
       className="form-control mr-2"
       style={{ width: "95%" }}
     />
+    <input
+      type="text"
+      placeholder="Filter by Work-site"
+      value={workSiteFilter}
+      onChange={(e) => setWorkSiteFilter(e.target.value)}
+      className="form-control mt-2"
+      style={{ width: "95%" }}
+    />
      <select
             className="form-control mt-2"
             style={{ width: '95%' }}
