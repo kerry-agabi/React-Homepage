@@ -371,10 +371,7 @@ const handleCareerInfoSubmit = (event) => {
           </Card.Body>
         </Card>
 
-        <Card
-          className="mx-auto"
-          style={{ width: "40rem", marginBottom: "25px" }}
-        >
+        <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Career Information</h2>
           <Form onSubmit={handleCareerInfoSubmit}>
@@ -453,6 +450,31 @@ const handleCareerInfoSubmit = (event) => {
                 </Form>
                 </Card.Body>
                 </Card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Card
           className="mx-auto"

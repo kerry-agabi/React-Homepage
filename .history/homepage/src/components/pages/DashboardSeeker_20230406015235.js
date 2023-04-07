@@ -10,12 +10,6 @@ function DashboardSeeker() {
     const [error, setError] = useState("")
     const {currentUser, logout} = useAuth()
     const navigate = useNavigate()
-    const [isEmployed, setIsEmployed] = useState(false);
-    const [salaryExpectation, setSalaryExpectation] = useState("");
-    const [contractPreference, setContractPreference] = useState("");
-    const [worksitePreference, setWorksitePreference] = useState("");
-    const [skills, setSkills] = useState([]);
-
     const [workExperiences, setWorkExperiences] = useState([{ JobTitle: "", industry: "", CompanyName: "", location: "" }]);
     const addWorkExperience = () => {
       setWorkExperiences([...workExperiences, { JobTitle: "", industry: "", CompanyName: "", location: "" }]);
@@ -33,24 +27,15 @@ function DashboardSeeker() {
   const removeEducation = (index) => {
     setEducations(educations.filter((_, i) => i !== index));
   };
-
-  const resetEducationFields = (index) => {
-    const newEducations = [...educations];
-    newEducations[index] = {
-      CourseTitle: "",
-      Qualification: "",
-      Institution: "",
-      CompletionDate: "",
-    };
-    setEducations(newEducations);
-  };
+  
   const handleEducationSubmit = (event, index) => {
     event.preventDefault();
     const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/educations`);
     jobSeekerRef.child(index).update(educations[index]);
-    resetEducationFields(index);
   };
-  
+
+    
+
 
     async function handleLogout(){
 
@@ -64,18 +49,26 @@ function DashboardSeeker() {
         } catch{
 
             setError('Failed to log out')
+
+
         }
+
+
+
     }
- const handleSubmit = async (event) => {
+
+    const handleSubmit = async (event) => {
       event.preventDefault();
     
       if (!cvFile) {
         alert("Please choose a file");
         return;
       }
+    
       // Create a reference to the file in Firebase Storage
       const storageRef = ref(storage, `cvs/${currentUser.uid}/${cvFile.name}`);
-    // Delete the old CV file if it exists
+    
+      // Delete the old CV file if it exists
       const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}`);
       const oldCvUrlSnapshot = await jobSeekerRef.child("cvUrl").get();
       if (oldCvUrlSnapshot.exists()) {
@@ -83,6 +76,24 @@ function DashboardSeeker() {
         const oldCvRef = ref(storage, oldCvUrl);
         await deleteObject(oldCvRef);
       }
+
+
+      const resetWorkExperienceFields = (index) => {
+        const newWorkExperiences = [...workExperiences];
+        newWorkExperiences[index] = {
+          JobTitle: "",
+          industry: "",
+          CompanyName: "",
+          location: "",
+        };
+        setWorkExperiences(newWorkExperiences);
+      };
+      const handleExperienceSubmit = (event, index) => {
+        event.preventDefault();
+        const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/workExperiences`);
+        jobSeekerRef.child(index).update(workExperiences[index]);
+        resetWorkExperienceFields(index);
+      };
       // Upload the new CV file to Firebase Storage
   const uploadTask = uploadBytesResumable(storageRef, cvFile);
 
@@ -115,7 +126,8 @@ const [cvFile, setCvFile] = useState(null);
     const handleFileChange = (event) => {
       setCvFile(event.target.files[0]);
     };
-const [firstName, setFirstName] = useState("");
+
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -124,7 +136,9 @@ const [firstName, setFirstName] = useState("");
   const [CompanyName, setCompanyName] = useState("");
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
-const handlePersonalSubmit = (event) => {
+
+
+ const handlePersonalSubmit = (event) => {
   event.preventDefault();
   const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}`);
   jobSeekerRef.update({
@@ -140,39 +154,9 @@ const handlePersonalSubmit = (event) => {
   setPhone("");
   setAddress("");
 };
-const resetWorkExperienceFields = (index) => {
-  const newWorkExperiences = [...workExperiences];
-  newWorkExperiences[index] = {
-    JobTitle: "",
-    industry: "",
-    CompanyName: "",
-    location: "",
-  };
-  setWorkExperiences(newWorkExperiences);
-};
 
-const handleExperienceSubmit = (event, index) => {
-  event.preventDefault();
-  const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/workExperiences`);
-  jobSeekerRef.child(index).update(workExperiences[index]);
-    // Call the function to reset the fields after updating the data
-    resetWorkExperienceFields(index);
-  
-};
 
-const handleCareerInfoSubmit = (event) => {
-  event.preventDefault();
-  const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}`);
-  jobSeekerRef.update({
-    careerInformation: {
-      isEmployed,
-      salaryExpectation,
-      contractPreference,
-      worksitePreference,
-      skills,
-    },
-  });
-};
+
   return (
     <div className="mt-6">
       <Container>
@@ -370,90 +354,6 @@ const handleCareerInfoSubmit = (event) => {
             </Button>
           </Card.Body>
         </Card>
-
-        <Card
-          className="mx-auto"
-          style={{ width: "40rem", marginBottom: "25px" }}
-        >
-        <Card.Body>
-          <h2 className="text-center mb-4">Career Information</h2>
-          <Form onSubmit={handleCareerInfoSubmit}>
-            <Form.Group controlId="formIsEmployed">
-              <Form.Check
-                type="checkbox"
-                label="Currently Employed"
-                checked={isEmployed}
-                onChange={(e) => setIsEmployed(e.target.checked)}
-              />
-            </Form.Group>
-            <Form.Group controlId="formSalaryExpectation">
-              <Form.Label>Salary Expectation</Form.Label>
-              <Form.Control
-                as="select"
-                value={salaryExpectation}
-                onChange={(e) => setSalaryExpectation(e.target.value)}
-              >
-                <option value="">Select</option>
-                {/* Add more options as needed */}
-                {Array.from({ length: 20 }, (_, i) => (i + 1) * 10000).map((val) => (
-                  <option key={val} value={val}>
-                    €{val}
-                  </option>
-                ))}
-                <option value="200000">€200,000 or more</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formContractPreference">
-              <Form.Label>Contract Preference</Form.Label>
-              <Form.Control
-                as="select"
-                value={contractPreference}
-                onChange={(e) => setContractPreference(e.target.value)}
-              >
-                <option value="">Select</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Fixed-Term">Fixed-Term</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formWorksitePreference">
-              <Form.Label>Work-site Preference</Form.Label>
-              <Form.Control
-                as="select"
-                value={worksitePreference}
-                onChange={(e) => setWorksitePreference(e.target.value)}
-              >
-                <option value="">Select</option>
-                <option value="On-site">On-site</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Remote">Remote</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formSkills">
-              <Form.Label>Skills</Form.Label>
-              <Form.Control
-                as="select"multiple
-                value={skills}
-                onChange={(e) =>
-                setSkills(Array.from(e.target.selectedOptions, (option) => option.value))
-                }
-                >
-                <option value="">Select</option>
-                {/* Add more options as needed */}
-                <option value="Skill1">Skill1</option>
-                <option value="Skill2">Skill2</option>
-                <option value="Skill3">Skill3</option>
-                <option value="Skill4">Skill4</option>
-                <option value="Skill5">Skill5</option>
-                </Form.Control>
-                </Form.Group>
-                <Button className="w-100" type="submit">
-                Save
-                </Button>
-                </Form>
-                </Card.Body>
-                </Card>
-
         <Card
           className="mx-auto"
           style={{ width: "40rem", marginBottom: "25px" }}
