@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { rtdb, storage } from "../../firebase";
-import { Card, Form, Button, Row, Col, Container, Alert, Badge } from "react-bootstrap";
+import { Card, Form, Button, Row, Col, Container, Alert } from "react-bootstrap";
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../AuthContext";
@@ -165,14 +165,15 @@ const handleExperienceSubmit = (event, index) => {
 
 const handleCareerInfoSubmit = (event) => {
   event.preventDefault();
-
-  const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}/careerInfo`);
+  const jobSeekerRef = rtdb.child(`jobSeekers/${currentUser.uid}`);
   jobSeekerRef.update({
-    isEmployed,
-    salaryExpectation,
-    contractPreference,
-    worksitePreference,
-    skills,
+    careerInformation: {
+      isEmployed,
+      salaryExpectation,
+      contractPreference,
+      worksitePreference,
+      skills,
+    },
   });
 };
 
@@ -190,25 +191,9 @@ const handleUnemployedChange = (e) => {
   }
 };
 
-const handleEmploymentStatusChange = (status) => {
-  setIsEmployed(status);
-};
-
-
-
-
-
-const handleSkillChange = (e) => {
-  const selectedOptions = Array.from(e.target.selectedOptions);
-  const newSkills = selectedOptions.map((option) => option.value);
-  setSkills(newSkills);
-};
-
 const removeSkill = (skillToRemove) => {
   setSkills(skills.filter((skill) => skill !== skillToRemove));
 };
-
-//start
   return (
     <div className="mt-6">
       <Container>
@@ -301,32 +286,35 @@ const removeSkill = (skillToRemove) => {
         <Card.Body>
           <h2 className="text-center mb-4">Career Information</h2>
           <Form onSubmit={handleCareerInfoSubmit}>
-            <Form.Group as={Row} controlId="formEmploymentStatus">
-              <Col sm="6">
-                <Form.Check
-                  type="radio"
-                  label="Employed"
-                  name="employmentStatus"
-                  onChange={() => handleEmploymentStatusChange("Yes")}
-                />
-              </Col>
-              <Col sm="6">
-                <Form.Check
-                  type="radio"
-                  label="Unemployed"
-                  name="employmentStatus"
-                  onChange={() => handleEmploymentStatusChange("No")}
-                />
-              </Col>
+            <Form.Group>
+              <Form.Label>Employment Status</Form.Label>
+              <Row>
+                <Col>
+                  <Form.Check
+                    type="checkbox"
+                    label="Employed"
+                    checked={employed}
+                    onChange={handleEmployedChange}
+                  />
+                </Col>
+                <Col>
+                  <Form.Check
+                    type="checkbox"
+                    label="Unemployed"
+                    checked={unemployed}
+                    onChange={handleUnemployedChange}
+                  />
+                </Col>
+              </Row>
             </Form.Group>
-            <Form.Group controlId="formSalaryExpectation" className = 'mt-3'>
+            <Form.Group controlId="formSalaryExpectation">
               <Form.Label>Salary Expectation</Form.Label>
               <Form.Control
                 as="select"
                 value={salaryExpectation}
                 onChange={(e) => setSalaryExpectation(e.target.value)}
               >
-                <option disabled value="">Select Salary</option>
+                <option value="">Select</option>
                 {/* Updated salary ranges */}
                 {Array.from({ length: 13 }, (_, i) => 10000 + i * 15000).map((val) => (
                   <option key={val} value={val}>
@@ -336,65 +324,65 @@ const removeSkill = (skillToRemove) => {
                 <option value="200000">€200,000 or more</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formContractPreference" className = 'mt-3'>
+            <Form.Group controlId="formContractPreference">
               <Form.Label>Contract Preference</Form.Label>
               <Form.Control
                 as="select"
                 value={contractPreference}
                 onChange={(e) => setContractPreference(e.target.value)}
               >
-                <option disabled value="">Select Contract</option>
+                <option value="">Select</option>
                 <option value="Part-time">Part-time</option>
                 <option value="Full-time">Full-time</option>
                 <option value="Fixed-Term">Fixed-Term</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formWorksitePreference" className = 'mt-3' >
+            <Form.Group controlId="formWorksitePreference">
               <Form.Label>Work-site Preference</Form.Label>
               <Form.Control
                 as="select"
                 value={worksitePreference}
                 onChange={(e) => setWorksitePreference(e.target.value)}
               >
-                <option disabled value="">Select Work-site</option>
+                <option value="">Select</option>
                 <option value="On-site">On-site</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="Remote">Remote</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formSkill" className = 'mt-3' >
+            <Form.Group controlId="formSkills">
               <Form.Label>Skills</Form.Label>
               <Form.Control
                 as="select"
+                multiple
                 value={skills}
-                onChange={handleSkillChange}
+                onChange={(e) =>
+                  setSkills(Array.from(e.target.selectedOptions, (option) => option.value))
+                }
               >
-                <option disabled value="">Select Skill 1 </option>
-                <option value="Java">Java</option>
-                <option value="Ruby">Ruby</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="Python">Python</option>
-                <option value="React">React</option>
-                <option value="SQL">SQL</option>
-                <option value="PHP">PHP</option>
-                <option value="C#">C#</option>
-                <option value="C++">C++</option>
-              </Form.Control>
-            </Form.Group>
-            <div>
-        {skills.map((skill, index) => (
-          <Badge
-            key={index}
-            pill
-            bg="primary"
-            className="mr-2 mb-2 mt-3"
-            onClick={() => removeSkill(skill)}
-          >
-            {skill} &times;
-          </Badge>
-        ))}
-      </div>
-                <Button className="w-100 mt-4" type="submit">
+                <option value="">Select</option>
+                {/* Add more options as needed */}
+                <option value="Skill1">Skill1</option>
+                <option value="Skill2">Skill2</option>
+                <option value="Skill3">Skill3</option>
+                <option value="Skill4">Skill4</option>
+                <option value="Skill5">Skill5</option>
+                </Form.Control>
+                </Form.Group>
+                <div>
+              {skills.map((skill, index) => (
+                <Badge key={index} variant="primary" className="mr-2 mb-2">
+                  {skill}{" "}
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => removeSkill(skill)}
+                  >
+                    &times;
+                  </span>
+                </Badge>
+              ))}
+                </div>
+                <Button className="w-100" type="submit">
                 Save
                 </Button>
                 </Form>

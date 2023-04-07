@@ -362,7 +362,7 @@ const removeSkill = (skillToRemove) => {
                 <option value="Remote">Remote</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formSkill" className = 'mt-3' >
+            <Form.Group controlId="formSkill">
               <Form.Label>Skills</Form.Label>
               <Form.Control
                 as="select"

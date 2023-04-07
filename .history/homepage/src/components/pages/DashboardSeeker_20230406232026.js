@@ -319,14 +319,14 @@ const removeSkill = (skillToRemove) => {
                 />
               </Col>
             </Form.Group>
-            <Form.Group controlId="formSalaryExpectation" className = 'mt-3'>
+            <Form.Group controlId="formSalaryExpectation">
               <Form.Label>Salary Expectation</Form.Label>
               <Form.Control
                 as="select"
                 value={salaryExpectation}
                 onChange={(e) => setSalaryExpectation(e.target.value)}
               >
-                <option disabled value="">Select Salary</option>
+                <option value="">Select</option>
                 {/* Updated salary ranges */}
                 {Array.from({ length: 13 }, (_, i) => 10000 + i * 15000).map((val) => (
                   <option key={val} value={val}>
@@ -336,7 +336,7 @@ const removeSkill = (skillToRemove) => {
                 <option value="200000">€200,000 or more</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formContractPreference" className = 'mt-3'>
+            <Form.Group controlId="formContractPreference">
               <Form.Label>Contract Preference</Form.Label>
               <Form.Control
                 as="select"
@@ -349,20 +349,20 @@ const removeSkill = (skillToRemove) => {
                 <option value="Fixed-Term">Fixed-Term</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formWorksitePreference" className = 'mt-3' >
+            <Form.Group controlId="formWorksitePreference">
               <Form.Label>Work-site Preference</Form.Label>
               <Form.Control
                 as="select"
                 value={worksitePreference}
                 onChange={(e) => setWorksitePreference(e.target.value)}
               >
-                <option disabled value="">Select Work-site</option>
+                <option disabled value="">Work-site</option>
                 <option value="On-site">On-site</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="Remote">Remote</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formSkill" className = 'mt-3' >
+            <Form.Group controlId="formSkill">
               <Form.Label>Skills</Form.Label>
               <Form.Control
                 as="select"

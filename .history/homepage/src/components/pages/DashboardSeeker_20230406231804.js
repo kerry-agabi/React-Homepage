@@ -297,109 +297,116 @@ const removeSkill = (skillToRemove) => {
           </Card.Body>
         </Card>
 
-        <Card className="mx-auto" style={{ width: "40rem", marginBottom: "25px" }}>
-        <Card.Body>
-          <h2 className="text-center mb-4">Career Information</h2>
-          <Form onSubmit={handleCareerInfoSubmit}>
-            <Form.Group as={Row} controlId="formEmploymentStatus">
-              <Col sm="6">
-                <Form.Check
-                  type="radio"
-                  label="Employed"
-                  name="employmentStatus"
-                  onChange={() => handleEmploymentStatusChange("Yes")}
-                />
-              </Col>
-              <Col sm="6">
-                <Form.Check
-                  type="radio"
-                  label="Unemployed"
-                  name="employmentStatus"
-                  onChange={() => handleEmploymentStatusChange("No")}
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group controlId="formSalaryExpectation" className = 'mt-3'>
-              <Form.Label>Salary Expectation</Form.Label>
-              <Form.Control
-                as="select"
-                value={salaryExpectation}
-                onChange={(e) => setSalaryExpectation(e.target.value)}
-              >
-                <option disabled value="">Select Salary</option>
-                {/* Updated salary ranges */}
-                {Array.from({ length: 13 }, (_, i) => 10000 + i * 15000).map((val) => (
-                  <option key={val} value={val}>
-                    €{val} - €{val + 15000}
+        <Card
+          className="mx-auto"
+          style={{ width: "40rem", marginBottom: "25px" }}
+        >
+          <Card.Body>
+            <h2 className="text-center mb-4">Career Information</h2>
+            <Form onSubmit={handleCareerInfoSubmit}>
+              <Form.Group as={Row} controlId="formEmploymentStatus">
+                <Col sm="6">
+                  <Form.Check
+                    type="radio"
+                    label="Employed"
+                    name="employmentStatus"
+                    onChange={() => handleEmploymentStatusChange("Yes")}
+                  />
+                </Col>
+                <Col sm="6">
+                  <Form.Check
+                    type="radio"
+                    label="Unemployed"
+                    name="employmentStatus"
+                    onChange={() => handleEmploymentStatusChange("No")}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group controlId="formSalaryExpectation">
+                <Form.Label>Salary Expectation</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={salaryExpectation}
+                  onChange={(e) => setSalaryExpectation(e.target.value)}
+                >
+                  <option value="">Select</option>
+                  {/* Updated salary ranges */}
+                  {Array.from({ length: 13 }, (_, i) => 10000 + i * 15000).map(
+                    (val) => (
+                      <option key={val} value={val}>
+                        €{val} - €{val + 15000}
+                      </option>
+                    )
+                  )}
+                  <option value="200000">€200,000 or more</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="formContractPreference">
+                <Form.Label>Contract Preference</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={contractPreference}
+                  onChange={(e) => setContractPreference(e.target.value)}
+                >
+                  <option value="">Select</option>
+                  <option value="Part-time">Part-time</option>
+                  <option value="Full-time">Full-time</option>
+                  <option value="Fixed-Term">Fixed-Term</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="formWorksitePreference">
+                <Form.Label>Work-site Preference</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={worksitePreference}
+                  onChange={(e) => setWorksitePreference(e.target.value)}
+                >
+                  <option value="">Select</option>
+                  <option value="On-site">On-site</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="Remote">Remote</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="formSkill">
+                <Form.Label>Skills</Form.Label>
+                <Form.Select
+                  multiple
+                  value={skills}
+                  onChange={handleSkillChange}
+                >
+                  <option disabled value="">
+                    Select
                   </option>
+                  <option value="Java">Java</option>
+                  <option value="Ruby">Ruby</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="Python">Python</option>
+                  <option value="React">React</option>
+                  <option value="SQL">SQL</option>
+                  <option value="PHP">PHP</option>
+                  <option value="C#">C#</option>
+                  <option value="C++">C++</option>
+                </Form.Select>
+              </Form.Group>
+              <div>
+                {skills.map((skill, index) => (
+                  <Badge
+                    key={index}
+                    pill
+                    bg="primary"
+                    className="mr-2 mb-2 mt-3"
+                    onClick={() => removeSkill(skill)}
+                  >
+                    {skill} &times;
+                  </Badge>
                 ))}
-                <option value="200000">€200,000 or more</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formContractPreference" className = 'mt-3'>
-              <Form.Label>Contract Preference</Form.Label>
-              <Form.Control
-                as="select"
-                value={contractPreference}
-                onChange={(e) => setContractPreference(e.target.value)}
-              >
-                <option disabled value="">Select Contract</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Full-time">Full-time</option>
-                <option value="Fixed-Term">Fixed-Term</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formWorksitePreference" className = 'mt-3' >
-              <Form.Label>Work-site Preference</Form.Label>
-              <Form.Control
-                as="select"
-                value={worksitePreference}
-                onChange={(e) => setWorksitePreference(e.target.value)}
-              >
-                <option disabled value="">Select Work-site</option>
-                <option value="On-site">On-site</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Remote">Remote</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formSkill" className = 'mt-3' >
-              <Form.Label>Skills</Form.Label>
-              <Form.Control
-                as="select"
-                value={skills}
-                onChange={handleSkillChange}
-              >
-                <option disabled value="">Select Skill 1 </option>
-                <option value="Java">Java</option>
-                <option value="Ruby">Ruby</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="Python">Python</option>
-                <option value="React">React</option>
-                <option value="SQL">SQL</option>
-                <option value="PHP">PHP</option>
-                <option value="C#">C#</option>
-                <option value="C++">C++</option>
-              </Form.Control>
-            </Form.Group>
-            <div>
-        {skills.map((skill, index) => (
-          <Badge
-            key={index}
-            pill
-            bg="primary"
-            className="mr-2 mb-2 mt-3"
-            onClick={() => removeSkill(skill)}
-          >
-            {skill} &times;
-          </Badge>
-        ))}
-      </div>
-                <Button className="w-100 mt-4" type="submit">
+              </div>
+              <Button className="w-100 mt-4" type="submit">
                 Save
-                </Button>
-                </Form>
-                </Card.Body>
-                </Card>
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
 
         <Card
           className="mx-auto"

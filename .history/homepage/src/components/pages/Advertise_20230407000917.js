@@ -228,7 +228,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                       onChange={(event) => setNewLocation(event.target.value)}
                     >
                       <option disabled value="">
-                        Select Location
+                        Select Contract
                       </option>
                       <option value="Carlow">Carlow</option>
                       <option value="Cavan">Cavan</option>

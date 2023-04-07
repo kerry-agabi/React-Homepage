@@ -64,9 +64,8 @@ function JobCard() {
   };
 
  return (
-   <div className="mt-4">
-    <div className="d-flex justify-content-center"> 
-     <div className="d-flex flex-wrap justify-content-between mb-4 w-50">
+   <div className="mt-4 w-50">
+     <div className="d-flex flex-wrap justify-content-between mb-4">
        <div className="w-50 mb-2">
          <input
            type="text"
@@ -160,9 +159,8 @@ function JobCard() {
     Clear Filters
   </Button>
 </div>
-</div>
 <div>
-  <h5 className='my-5'>
+  <h5>
     {filteredJobs.length > 0
       ? `Found ${filteredJobs.length} job listing${filteredJobs.length > 1 ? "s" : ""} available.`
       : "Sorry, we currently do not have a job listing that matches your specific requirement, come back again in the near future."}

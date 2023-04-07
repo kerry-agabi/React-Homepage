@@ -281,7 +281,7 @@ const removeSkill = (skillToRemove) => {
                 </Col>
               </Row>
               <Form.Group controlId="formAddress" className="mt-3">
-                <Form.Label>Address:</Form.Label>
+                <Form.Label>Address or Eircode:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter address"

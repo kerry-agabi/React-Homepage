@@ -319,14 +319,14 @@ const removeSkill = (skillToRemove) => {
                 />
               </Col>
             </Form.Group>
-            <Form.Group controlId="formSalaryExpectation" className = 'mt-3'>
+            <Form.Group controlId="formSalaryExpectation">
               <Form.Label>Salary Expectation</Form.Label>
               <Form.Control
                 as="select"
                 value={salaryExpectation}
                 onChange={(e) => setSalaryExpectation(e.target.value)}
               >
-                <option disabled value="">Select Salary</option>
+                <option value="">Select</option>
                 {/* Updated salary ranges */}
                 {Array.from({ length: 13 }, (_, i) => 10000 + i * 15000).map((val) => (
                   <option key={val} value={val}>
@@ -336,40 +336,40 @@ const removeSkill = (skillToRemove) => {
                 <option value="200000">€200,000 or more</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formContractPreference" className = 'mt-3'>
+            <Form.Group controlId="formContractPreference">
               <Form.Label>Contract Preference</Form.Label>
               <Form.Control
                 as="select"
                 value={contractPreference}
                 onChange={(e) => setContractPreference(e.target.value)}
               >
-                <option disabled value="">Select Contract</option>
+                <option value="">Select</option>
                 <option value="Part-time">Part-time</option>
                 <option value="Full-time">Full-time</option>
                 <option value="Fixed-Term">Fixed-Term</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formWorksitePreference" className = 'mt-3' >
+            <Form.Group controlId="formWorksitePreference">
               <Form.Label>Work-site Preference</Form.Label>
               <Form.Control
                 as="select"
                 value={worksitePreference}
                 onChange={(e) => setWorksitePreference(e.target.value)}
               >
-                <option disabled value="">Select Work-site</option>
+                <option value="">Select</option>
                 <option value="On-site">On-site</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="Remote">Remote</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formSkill" className = 'mt-3' >
+            <Form.Group controlId="formSkill">
               <Form.Label>Skills</Form.Label>
               <Form.Control
                 as="select"
                 value={skills}
                 onChange={handleSkillChange}
               >
-                <option disabled value="">Select Skill 1 </option>
+                <option disabled value="">Select</option>
                 <option value="Java">Java</option>
                 <option value="Ruby">Ruby</option>
                 <option value="JavaScript">JavaScript</option>
@@ -387,7 +387,7 @@ const removeSkill = (skillToRemove) => {
             key={index}
             pill
             bg="primary"
-            className="mr-2 mb-2 mt-3"
+            className="mr-2 mb-2 mt-4"
             onClick={() => removeSkill(skill)}
           >
             {skill} &times;

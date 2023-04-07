@@ -4,6 +4,11 @@ import { Card, Form, Button, Row, Col, Container, Alert, Badge } from "react-boo
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../AuthContext";
+import axios from 'axios';
+
+
+const API_KEY = '1c09947a8fmsh3685aa048f22b0cp1f02bejsnf31a4398c036';
+const API_ENDPOINT = 'https://eircodr1.p.rapidapi.com/getEircode';
 
 function DashboardSeeker() {
 
@@ -208,6 +213,23 @@ const removeSkill = (skillToRemove) => {
   setSkills(skills.filter((skill) => skill !== skillToRemove));
 };
 
+const fetchAddress = async (eircode) => {
+  try {
+    const response = await axios.get(API_ENDPOINT, {
+      params: {
+        eircode: eircode,
+        key: API_KEY,
+      },
+    });
+
+    if (response.data && response.data.result) {
+      setAddress(response.data.result[0].address);
+    }
+  } catch (error) {
+    console.error('Error fetching address:', error);
+  }
+};
+
 //start
   return (
     <div className="mt-6">
@@ -281,14 +303,17 @@ const removeSkill = (skillToRemove) => {
                 </Col>
               </Row>
               <Form.Group controlId="formAddress" className="mt-3">
-                <Form.Label>Address:</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter address"
-                  value={address}
-                  onChange={(event) => setAddress(event.target.value)}
-                />
-              </Form.Group>
+            <Form.Label>Address or Eircode:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter address"
+              value={address}
+              onChange={(event) => {
+                setAddress(event.target.value);
+                fetchAddress(event.target.value);
+              }}
+            />
+          </Form.Group>
               <br></br>
               <Button variant="primary" type="submit">
                 Save

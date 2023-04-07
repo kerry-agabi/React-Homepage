@@ -304,7 +304,7 @@ const removeSkill = (skillToRemove) => {
             <Form.Group as={Row} controlId="formEmploymentStatus">
               <Col sm="6">
                 <Form.Check
-                  type="radio"
+                  type="checkbox"
                   label="Employed"
                   name="employmentStatus"
                   onChange={() => handleEmploymentStatusChange("Yes")}
@@ -312,7 +312,7 @@ const removeSkill = (skillToRemove) => {
               </Col>
               <Col sm="6">
                 <Form.Check
-                  type="radio"
+                  type="checkbox"
                   label="Unemployed"
                   name="employmentStatus"
                   onChange={() => handleEmploymentStatusChange("No")}

@@ -163,14 +163,13 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     value={newContract}
                     onChange={(event) => setNewContract(event.target.value)}
                   >
-                    <option disabled value="">
-                      Select Contract{" "}
-                    </option>
+                    <option value="">Select Work-site</option>
                     <option value="Full-Time">Full-Time</option>
                     <option value="Part-Time">Part-Time</option>
                     <option value="Fixed-Term">Fixed-Term</option>
-                  </Form.Select>
+                    </Form.Select>
                 </Form.Group>
+
 
                 <Form.Group controlId="worksite-for-my-form" className="mt-3">
                   <Form.Label>Work-site</Form.Label>
@@ -178,9 +177,7 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     value={newWorkSite}
                     onChange={(event) => setNewWorkSite(event.target.value)}
                   >
-                    <option disabled value="">
-                      Select Work-site
-                    </option>
+                    <option value="">Select Work-site</option>
                     <option value="On-site">On-site</option>
                     <option value="Hybrid">Hybrid</option>
                     <option value="Remote">Remote</option>
@@ -220,51 +217,15 @@ import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase
                     value={newJobTitle}
                     onChange={(event) => setNewJobTitle(event.target.value)}
                   />
-
-                  <Form.Group controlId="location-for-my-form" className="mt-3">
-                    <Form.Label>Location</Form.Label>
-                    <Form.Select
-                      value={newLocation}
-                      onChange={(event) => setNewLocation(event.target.value)}
-                    >
-                      <option disabled value="">
-                        Select Location
-                      </option>
-                      <option value="Carlow">Carlow</option>
-                      <option value="Cavan">Cavan</option>
-                      <option value="Clare">Clare</option>
-                      <option value="Cork">Cork</option>
-                      <option value="Donegal">Donegal</option>
-                      <option value="Dublin">Dublin</option>
-                      <option value="Galway">Galway</option>
-                      <option value="Kerry">Kerry</option>
-                      <option value="Kildare">Kildare</option>
-                      <option value="Kilkenny">Kilkenny</option>
-                      <option value="Laois">Laois</option>
-                      <option value="Leitrim">Leitrim</option>
-                      <option value="Limerick">Limerick</option>
-                      <option value="Longford">Longford</option>
-                      <option value="Louth">Louth</option>
-                      <option value="Mayo">Mayo</option>
-                      <option value="Meath">Meath</option>
-                      <option value="Monaghan">Monaghan</option>
-                      <option value="Offaly">Offaly</option>
-                      <option value="Roscommon">Roscommon</option>
-                      <option value="Sligo">Sligo</option>
-                      <option value="Tipperary">Tipperary</option>
-                      <option value="Waterford">Waterford</option>
-                      <option value="Westmeath">Westmeath</option>
-                      <option value="Wexford">Wexford</option>
-                      <option value="Wicklow">Wicklow</option>
-
-                      <option value="Antrim">Antrim</option>
-                      <option value="Armagh">Armagh</option>
-                      <option value="Derry">Derry</option>
-                      <option value="Down">Down</option>
-                      <option value="Fermanagh">Fermanagh</option>
-                      <option value="Tyrone">Tyrone</option>
-                    </Form.Select>
-                  </Form.Group>
+                </Form.Group>
+                <Form.Group controlId="location-for-my-form" className="mt-3">
+                  <Form.Label>Location</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Location"
+                    value={newLocation}
+                    onChange={(event) => setNewLocation(event.target.value)}
+                  />
                 </Form.Group>
                 <Form.Group controlId="skills-for-my-form" className="mt-3">
                   <Form.Label>Skills</Form.Label>

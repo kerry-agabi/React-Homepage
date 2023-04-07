@@ -55,18 +55,11 @@ function JobCard() {
   .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort jobs by date (most recent to least recent)
 
 
-  const clearFilters = () => {
-    setTitleFilter("");
-    setLocationFilter("");
-    setSkillsFilter("");
-    setWorkSiteFilter("");
-    setContractFilter("");
-  };
+  
 
  return (
    <div className="mt-4">
-    <div className="d-flex justify-content-center"> 
-     <div className="d-flex flex-wrap justify-content-between mb-4 w-50">
+     <div className="d-flex flex-wrap justify-content-between mb-4">
        <div className="w-50 mb-2">
          <input
            type="text"
@@ -151,22 +144,6 @@ function JobCard() {
            <option value="hybrid">Hybrid</option>
            <option value="remote">Remote</option>
          </select>
-         <Button
-    variant="secondary"
-    className="mt-2"
-    style={{ width: "95%" }}
-    onClick={clearFilters}
-  >
-    Clear Filters
-  </Button>
-</div>
-</div>
-<div>
-  <h5 className='my-5'>
-    {filteredJobs.length > 0
-      ? `Found ${filteredJobs.length} job listing${filteredJobs.length > 1 ? "s" : ""} available.`
-      : "Sorry, we currently do not have a job listing that matches your specific requirement, come back again in the near future."}
-  </h5>
        </div>
      </div>
      {filteredJobs.map((job) => {
