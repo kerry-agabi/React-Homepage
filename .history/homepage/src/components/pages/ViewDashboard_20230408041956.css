@@ -1,0 +1,32 @@
+.view-dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* Adjust this value based on the height of your Navbar */
+    padding: 1rem;
+  }
+  
+  .view-dashboard-card {
+    width: 100%;
+    max-width: 40rem;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  .view-dashboard-card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  
+  .view-dashboard-card-body h4 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .view-dashboard-card-body p {
+    margin-bottom: 1rem;
+  }
+  
+  .view-dashboard-card-body hr {
+    margin: 1rem 0;
+  }
+  
