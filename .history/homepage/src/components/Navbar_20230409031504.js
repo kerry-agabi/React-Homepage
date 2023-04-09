@@ -47,10 +47,10 @@ function Navbar() {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar mb-1">
         <div className="navbar-container">
           <Link to="/" className="navbar-logo" style={{ marginLeft: '10px' }} onClick={closeMobileMenu}>
-           R.A <FontAwesomeIcon className='ml-3' icon={faUser} />
+           R.A <FontAwesomeIcon icon={faUser} />
           </Link>
 
           <div className="menu-icon" onClick={handleClick}>
