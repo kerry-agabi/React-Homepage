@@ -1,0 +1,66 @@
+@media (max-width: 576px) {
+    .view-dashboard-card {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .view-dashboard-card-header {
+      font-size: 1.2rem;
+      padding: 0.5rem;
+    }
+  
+    .view-dashboard-card-body {
+      padding: 1rem;
+    }
+  
+    .view-dashboard-card-body h4 {
+      font-size: 1rem;
+    }
+  
+    .view-dashboard-card-body p {
+      font-size: 0.9rem;
+    }
+  
+    .view-dashboard-card-body hr {
+      margin: 0.5rem 0;
+    }
+  
+    .view-dashboard-button {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+  
+  @media (min-width: 577px) and (max-width: 768px) {
+    .view-dashboard-card {
+      max-width: 90%;
+      margin-bottom: 20px;
+    }
+  
+    .view-dashboard-card-header {
+      font-size: 1.4rem;
+      padding: 0.8rem;
+    }
+  
+    .view-dashboard-card-body {
+      padding: 1.5rem;
+    }
+  
+    .view-dashboard-card-body h4 {
+      font-size: 1.1rem;
+    }
+  
+    .view-dashboard-card-body p {
+      font-size: 0.95rem;
+    }
+  
+    .view-dashboard-card-body hr {
+      margin: 0.8rem 0;
+    }
+  
+    .view-dashboard-button {
+      font-size: 0.95rem;
+      padding: 0.45rem 0.9rem;
+    }
+  }
+  

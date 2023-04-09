@@ -1,0 +1,33 @@
+.jobseeker-menu {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  .jobseeker-menu h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .jobseeker-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .jobseeker-menu li {
+    margin-bottom: 1rem;
+  }
+  
+  .jobseeker-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+  }
+  
+  .jobseeker-menu li a:hover {
+    color: #007bff;
+  }
+  

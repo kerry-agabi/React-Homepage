@@ -1,0 +1,33 @@
+/* JobCard.css */
+
+/* Mobile-first styles */
+.mb-2 {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .w-50 {
+    width: 100% !important;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  
+  /* Tablet styles */
+  @media (min-width: 768px) {
+    .w-50 {
+      width: 48% !important;
+    }
+  
+    .form-control {
+      margin-bottom: 0;
+    }
+  }
+  
+  /* Desktop styles */
+  @media (min-width: 992px) {
+    .w-50 {
+      width: 50% !important;
+    }
+  }
+  
