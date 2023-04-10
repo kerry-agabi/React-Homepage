@@ -1,0 +1,25 @@
+.main-container {
+    padding: 30px;
+  }
+  
+  @media (max-width: 768px) {
+    .main-container {
+      padding: 15px;
+    }
+  
+    .card {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  
+    .card-body {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  
+    button {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+  
