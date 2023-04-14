@@ -134,7 +134,7 @@ import './UpdateJob.css'
         setNewJobDescription('');
         setNewJobTitle('');
         setNewLocation('');
-        setSelectedSkills([]);
+        setSelectedSkills('');
         setNewdate('');
         setNewLink('');
         setImageFile(null);

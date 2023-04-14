@@ -91,7 +91,7 @@ function Navbar() {
         )}
 
         {currentUser && button && (
-          <Button className="btn--outline"  onClick={handleAuthButton}>
+          <Button className="btn--outline" style={{ position: 'static' }} onClick={handleAuthButton}>
             Logout
           </Button>
           )}
