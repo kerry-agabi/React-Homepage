@@ -1,0 +1,54 @@
+/* Employee.module.css */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  width: 40%;
+}
+
+.input-group input {
+  width: 50%;
+}
+
+.submit-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column;
+  }
+
+  .input-group label {
+    width: 100%;
+  }
+
+  .input-group input {
+    width: 100%;
+  }
+
+  .submit-buttons {
+    flex-direction: column;
+  }
+
+  .submit-buttons button {
+    margin-bottom: 10px;
+  }
+}

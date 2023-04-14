@@ -1,0 +1,59 @@
+.updateDashboard {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+  }
+  
+  .profilePhoto {
+    width: 40rem;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .personalDetails {
+    width: 60rem;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .careerInformation {
+    width: 60rem;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* SpecificFormStyles.css */
+  
+  .work-experience-card {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .work-experience-card .form-group,
+  .work-experience-card .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .education-card {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .education-card .form-group,
+  .education-card .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .cv-upload-card {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cv-upload-card .form-group,
+  .cv-upload-card .form-control {
+    margin-bottom: 10px;
+  }
+  

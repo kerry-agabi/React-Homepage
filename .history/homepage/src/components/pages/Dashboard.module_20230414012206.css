@@ -1,0 +1,50 @@
+.updateDashboard {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+  }
+  
+  .profilePhoto {
+    width: 40rem;
+    margin-bottom: 25px;
+  }
+  
+  .personalDetails {
+    width: 60rem;
+    margin-bottom: 25px;
+  }
+  
+  .careerInformation {
+    width: 60rem;
+    margin-bottom: 25px;
+  }
+  
+  /* SpecificFormStyles.css */
+
+.work-experience-card {
+    /* Add work experience card specific styles */
+  }
+  
+  .work-experience-card .form-group,
+  .work-experience-card .form-control {
+    /* Add work experience form specific styles */
+  }
+  
+  .education-card {
+    /* Add education card specific styles */
+  }
+  
+  .education-card .form-group,
+  .education-card .form-control {
+    /* Add education form specific styles */
+  }
+  
+  .cv-upload-card {
+    /* Add CV upload card specific styles */
+  }
+  
+  .cv-upload-card .form-group,
+  .cv-upload-card .form-control {
+    /* Add CV upload form specific styles */
+  }
+  
