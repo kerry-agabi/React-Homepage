@@ -5,7 +5,7 @@ import { collection, getDocs, query, where, doc, getDoc  } from 'firebase/firest
 import { db, storage } from '../../firebase';
 import { Card, Row, Col, Image } from 'react-bootstrap';
 import { getDownloadURL, ref } from 'firebase/storage';
-import styles from './View.module.css'
+import './view.module.css'
 
 
 export const calculateMatchingScore = (job, jobSeeker) => {
@@ -106,9 +106,9 @@ function View() {
     getApplications();
   }, [jobId]);
   return (
-<Container className={`justify-content-center ${styles.container}`}>
-<h2 className="mt-4 mb-4">Job Applications</h2>  
-  {applications.length === 0 ? (
+    <Container className='justify-content-center'>
+    <h2 className="mt-4 mb-4">Job Applications</h2>
+    {applications.length === 0 ? (
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
           <h4>This job listing has no current applicants, come back in the near future</h4>
         </div>
@@ -116,9 +116,9 @@ function View() {
     <Row className="d-flex justify-content-center">
       {applications.map((application) => (
         <Col xs={12} md={6} lg={4} className="mb-4" key={application.id}>
-  <Card className={styles.card}> 
-               <Card.Body>
-               <div className={`d-flex justify-content-center ${styles.imageContainer}`}>
+          <Card>
+              <Card.Body>
+                <div className="d-flex justify-content-center">
                   <Image
                     src={application.jobSeeker.profilePhoto}
                     alt={`${application.firstName} ${application.lastName}`}
@@ -127,11 +127,11 @@ function View() {
                     style={{ height: '100px', objectFit: 'cover' }}
                   />
                 </div>
-                <Card.Title className={`mt-3 ${styles.title}`}>
+                <Card.Title className="mt-3">
                   <strong>Name:</strong> {application.firstName} {application.lastName}
                 </Card.Title>
-                <Card.Subtitle className={`mb-2 text-muted ${styles.subtitle}`}>       
-                           <strong>Email:</strong> {application.email}
+                <Card.Subtitle className="mb-2 text-muted">
+                  <strong>Email:</strong> {application.email}
                 </Card.Subtitle>
                 <Card.Text>
                   <strong>Cover Note:</strong> {application.coverNote}

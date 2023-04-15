@@ -67,7 +67,7 @@ const Employee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://kerryagabi.pythonanywhere.com/predict", employeeData);
+      const response = await axios.post("http://localhost:5000/predict", employeeData);
       setResult(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

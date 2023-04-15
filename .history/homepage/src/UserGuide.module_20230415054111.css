@@ -24,7 +24,7 @@
     list-style-position: inside;
   }
   
-  @media (max-width: 767px) {
+  @media (max-width: 576px) {
 
 .userGuideContainer {
     margin-top: 20px;

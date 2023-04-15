@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./Employee.module.css"; 
 import { Button, Form } from "react-bootstrap";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Employee = () => {
@@ -67,7 +67,7 @@ const Employee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://kerryagabi.pythonanywhere.com/predict", employeeData);
+      const response = await axios.post("http://localhost:5000/predict", employeeData);
       setResult(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -303,7 +303,7 @@ const Employee = () => {
         </div>
         <div className={styles.submitButtons}>
           <Button type="submit">Predict</Button>
-          <Link to="/user-guide" className='submitButtons'>
+          <Link to="/user-guide">
         User Guide
       </Link>
         </div>
