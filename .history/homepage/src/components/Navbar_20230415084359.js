@@ -38,11 +38,6 @@ function Navbar() {
     }
   };
 
-  const handleMobileAuthButton = async () => {
-    closeMobileMenu();
-    await handleAuthButton();
-  };
-
   useEffect(() => {
     showButton();
   }, []);
@@ -83,8 +78,8 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-             <li className="nav-item">
-  <Link to={currentUser ? '/#' : '/signup'} className="nav-links-mobile"onClick={handleMobileAuthButton}>
+            <li className="nav-item">
+  <Link to={currentUser ? '/#' : '/signup'} className="nav-links-mobile" onClick={closeMobileMenu}>
     {currentUser ? 'Logout' : 'Sign up'}
   </Link>
 </li>

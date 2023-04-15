@@ -49,28 +49,21 @@ function App() {
               <Route path='/job2' exact element={<PrivateRoute><JobCardAlgo /></PrivateRoute>} />
               <Route path='/job' exact element={<Job/>} />
               <Route path='/user-guide' exact element={<UserGuide/>} />
-              <Route path='/update1' element={<AdminRoute />}>
-                <Route index element={<Update />} />
-              </Route>
-              <Route path='/delete' element={<AdminRoute />}>
-                <Route index element={<Delete />} />
-              </Route>   
+              <Route path='/update1' element={<AdminRoute><Update /></AdminRoute>} /> 
+              <Route path='/delete' element={<AdminRoute><Delete /></AdminRoute>} />    
               <Route path="/update/:id" element={<UpdateJob />} />
               <Route path='/advertise' element={<AdminRoute />}>
                 <Route index element={<Advertise />} />
               </Route>              
-              <Route path='/view' element={<AdminRoute />}>
-                <Route index element={<ViewApplications />} />
-              </Route>
+              <Route path='/view' exact element={<AdminRoute><ViewApplications /></AdminRoute>} />
               <Route path='/view2/:jobId' exact element={<PrivateRoute><View /></PrivateRoute>} />
               <Route path="/jobapplication/:jobId" exact element={<PrivateRoute><JobApplication /></PrivateRoute>} />
               <Route path='/signup' exact element={<SignUp />} />
               <Route path='/login' exact element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} />
-              <Route path='/churn' element={<AdminRoute />}>
-                <Route index element={<EmployeeForm />} />
-              </Route>
+              <Route path='/churn' exact element={<AdminRoute><EmployeeForm /></AdminRoute>} />
+
 
               
               

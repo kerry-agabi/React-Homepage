@@ -333,7 +333,7 @@ import './UpdateJob.css'
             value={skillsFilter}
             onChange={handleSkillsFilterChange}
             style={{ width: '95%' }}
-            
+            required
            
           />
           {filteredSkills.length > 0 && (

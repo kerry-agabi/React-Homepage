@@ -84,7 +84,7 @@ function Navbar() {
             </li>
             <li className="nav-item">
              <li className="nav-item">
-  <Link to={currentUser ? '/#' : '/signup'} className="nav-links-mobile"onClick={handleMobileAuthButton}>
+  <Link to={currentUser ? '/#' : '/signup'} className="nav-links-mobile"onClick={handleAuthButton}>
     {currentUser ? 'Logout' : 'Sign up'}
   </Link>
 </li>
@@ -98,7 +98,7 @@ function Navbar() {
         )}
 
         {currentUser && button && (
-          <Button className="btn--outline"  onClick={handleAuthButton}>
+          <Button className="btn--outline"  onClick={handleMobileAuthButton}>
             Logout
           </Button>
           )}

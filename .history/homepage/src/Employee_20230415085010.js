@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./Employee.module.css"; 
 import { Button } from "react-bootstrap";
-import {  Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const Employee = () => {

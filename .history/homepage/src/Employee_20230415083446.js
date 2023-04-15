@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./Employee.module.css"; 
-import { Button } from "react-bootstrap";
-import {  Link } from 'react-router-dom';
+import { Button, Form } from "react-bootstrap";
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const Employee = () => {
@@ -53,11 +53,16 @@ const Employee = () => {
     OverTime_Yes: ""
   });
   const [result, setResult] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setEmployeeData({ ...employeeData, [e.target.name]: parseInt(e.target.value) });
   };
 
+  const handleNav = () => {
+    navigate('/user-guide');
+
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
