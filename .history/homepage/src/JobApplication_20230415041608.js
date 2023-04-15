@@ -114,11 +114,10 @@ function JobApplication() {
 
   return (
     <Container fluid className="job-application-container">
-      
-    <Row>
-      <Col>
-      {job && (
-            <Card className="job-applit">
+      <Row>
+        
+          {job && (
+            <Card className="mt-15">
               <Card.Header className="job-details-card-header">
                 Job Details
               </Card.Header>
@@ -137,6 +136,11 @@ function JobApplication() {
               </Card.Body>
             </Card>
           )}
+        
+      </Row>
+    <Row>
+      
+      
       {showAlert && (
         <Alert
           variant="success"
@@ -247,7 +251,7 @@ function JobApplication() {
       </Card.Footer>
     </Card>
   </Form>
-  </Col>
+  
     </Row>
 </Container>
 );

@@ -118,7 +118,7 @@ function JobApplication() {
     <Row>
       <Col>
       {job && (
-            <Card className="job-applit">
+            <Card className="mt-15">
               <Card.Header className="job-details-card-header">
                 Job Details
               </Card.Header>

@@ -114,29 +114,26 @@ function JobApplication() {
 
   return (
     <Container fluid className="job-application-container">
-      
     <Row>
       <Col>
-      {job && (
-            <Card className="job-applit">
-              <Card.Header className="job-details-card-header">
-                Job Details
-              </Card.Header>
-              <Card.Body className="job-details-card-body d-flex align-items-center">
-                <div>
-                  <Card.Title>{job.JobTitle}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    {job.company}
-                  </Card.Subtitle>
-                </div>
-                <img
-                  className="job-details-card-image ml-auto"
-                  alt={job.company}
-                  src={job.ImageUrl}
-                />
-              </Card.Body>
-            </Card>
-          )}
+        {job && (
+          <Card className="job-details-card">
+            <Card.Header className="job-details-card-header">
+              Job Details
+            </Card.Header>
+            <Card.Body className="job-details-card-body">
+              <Card.Title>{job.title}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                {job.company}
+              </Card.Subtitle>
+              <Card.Text>{job.description}</Card.Text>
+            </Card.Body>
+          </Card>
+        )}
+      </Col>
+    </Row>
+    <Row>
+      <Col>
       {showAlert && (
         <Alert
           variant="success"

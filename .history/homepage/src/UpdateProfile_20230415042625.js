@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
 import { useAuth } from "./AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+import { auth } from "./firebase";
 
 export default function UpdateProfile() {
   const emailRef = useRef();
@@ -15,14 +15,13 @@ export default function UpdateProfile() {
   const navigate = useNavigate();
 
   async function checkCurrentPassword() {
-    const auth = getAuth();
-    const credential = EmailAuthProvider.credential(
+    const credential = auth.EmailAuthProvider.credential(
       currentUser.email,
       currentPasswordRef.current.value
     );
 
     try {
-      await reauthenticateWithCredential(currentUser, credential);
+      await currentUser.reauthenticateWithCredential(credential);
       return true;
     } catch (error) {
       setError("Incorrect current password");

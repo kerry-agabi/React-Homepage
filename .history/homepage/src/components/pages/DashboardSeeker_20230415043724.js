@@ -11,7 +11,7 @@ import { IonAvatar } from '@ionic/react';
 import Papa from 'papaparse';
 import Select from "react-select";
 import './skills.csv'
-import { getAuth, EmailAuthProvider } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 function DashboardSeeker() {
@@ -257,12 +257,9 @@ useEffect(() => {
     setError("Password is required to update your email.");
     return;
   }
- 
   const auth = getAuth();
-  const credential = EmailAuthProvider.credential(currentUser.email, currentPassword);
-
   try {
-    await currentUser.reauthenticateWithCredential(credential);
+    await signInWithEmailAndPassword(auth, currentUser.email, currentPassword);
     setError(""); // Clear any previous error messages
   } catch (error) {
     setError("Failed to re-authenticate. " + error.message);
