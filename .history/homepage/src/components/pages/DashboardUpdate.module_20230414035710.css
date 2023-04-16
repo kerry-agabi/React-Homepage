@@ -1,0 +1,43 @@
+.dashboardUpdateContainer {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cardContainer {
+  margin-bottom: 25px;
+}
+
+.cardHeader {
+  font-weight: bold;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:800px;
+}
+
+.cardBody .form {
+  width:800px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .dashboardUpdateContainer {
+    padding: 20px 10px;
+  }
+
+  .cardContainer {
+    width: 100%;
+  }
+
+  .cardHeader {
+    font-size: 16px;
+  }
+
+  .cardBody .form {
+    max-width: 100%;
+  }
+}

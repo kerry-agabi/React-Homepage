@@ -1,0 +1,51 @@
+/* UserGuide.module.css */
+.userGuideContainer {
+    margin-top: 20px;
+  }
+  
+  .header {
+    text-align: center;
+  }
+  
+  .definition {
+    text-align: center;
+  }
+  
+  .definition h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .definition p {
+    font-size: 1.2em;
+  }
+  
+  .list {
+    list-style-position: inside;
+  }
+  
+  @media (max-width: 767px) {
+
+.userGuideContainer {
+    margin-top: 20px;
+    margin-left:-15px
+  }
+    .header {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+  
+    .definition {
+      font-size: 0.9em;
+    }
+    
+  }
+
+  @media (max-width: 576px) {
+
+    .userGuideContainer {
+      margin-top: 20px;
+      margin-left:-15px
+    }
+  }
+  

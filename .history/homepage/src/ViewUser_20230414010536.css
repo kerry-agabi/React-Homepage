@@ -1,0 +1,50 @@
+/* ViewUser.css */
+
+/* Define styles for all screen widths */
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Define styles for screens up to 576px (mobile devices) */
+  @media (max-width: 575.98px) {
+    .card-container .card {
+      width: 50%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Define styles for screens between 576px and 767px (small devices) */
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .card-container .card {
+      width: 90%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Define styles for screens between 768px and 991px (tablets) */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .card-container .card {
+      width: 70%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Define styles for screens between 992px and 1199px (desktops) */
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    .card-container .card {
+      width: 60%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Define styles for screens 1200px and larger (large desktops) */
+  @media (min-width: 1200px) {
+    .card-container .card {
+      width: 50%;
+      margin-bottom: 20px;
+    }
+  }
+  

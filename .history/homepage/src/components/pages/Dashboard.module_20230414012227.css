@@ -1,0 +1,22 @@
+.updateDashboard {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+  }
+  
+  .profilePhoto {
+    width: 40rem;
+    margin-bottom: 25px;
+  }
+  
+  .personalDetails {
+    width: 60rem;
+    margin-bottom: 25px;
+  }
+  
+  .careerInformation {
+    width: 60rem;
+    margin-bottom: 25px;
+  }
+  
+  

@@ -1,0 +1,42 @@
+.dashboardUpdateContainer {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card-container {
+  margin-bottom: 25px;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-body .form {
+  width: 100%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .dashboard-update-container {
+    padding: 20px 10px;
+  }
+
+  .card-container {
+    width: 100%;
+  }
+
+  .card-header {
+    font-size: 16px;
+  }
+
+  .card-body .form {
+    max-width: 100%;
+  }
+}

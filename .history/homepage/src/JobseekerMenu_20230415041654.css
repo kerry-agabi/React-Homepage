@@ -1,0 +1,50 @@
+.job-application-container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.job-details-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.job-details-card-header {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.job-details-card-body {
+  position: relative;
+}
+
+.job-details-card-image {
+  height: 70px;
+  padding: 10px;
+}
+
+.job-application-form {
+  margin-top: 20px;
+}
+
+.job-application-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.job-application-card-header {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.job-application-button {
+  float: right;
+}
+
+@media (max-width: 768px) {
+  .job-application-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}

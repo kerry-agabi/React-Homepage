@@ -1,0 +1,58 @@
+/* Employee.module.css */
+.container {
+  width: 100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.inputGroup label {
+  width: 40%;
+}
+
+.inputGroup input {
+  width: 50%;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 4px; /* Add border radius for a smoother appearance */
+  padding: 6px 12px; /* Add some padding for better usability */
+  background-color: #fff; /* Ensure the background color is white */
+}
+
+.submit-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .inputGroup {
+    flex-direction: column;
+  }
+
+  .inputGroup label {
+    width: 100%;
+  }
+
+  .inputGroup input {
+    width: 100%;
+  }
+
+  .submit-buttons {
+    flex-direction: column;
+  }
+
+  .submit-buttons button {
+    margin-bottom: 10px;
+  }
+}
