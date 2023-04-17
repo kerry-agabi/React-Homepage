@@ -67,8 +67,7 @@ export default function SignUp() {
                     <option value="recruiter">Recruiter</option>
                   </Form.Control>
                 </Form.Group>
-<br>
-</br>
+
                 <Form.Group id="email">
                   <Form.Label> Email </Form.Label>
                   <Form.Control type="email" ref={emailRef} required />

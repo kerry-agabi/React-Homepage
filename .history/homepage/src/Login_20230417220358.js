@@ -14,36 +14,28 @@ export default function Login() {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
-    async function fetchUserRole() {
-      if (currentUser) {
-        try {
-          const userDoc = await db.collection("users").doc(currentUser.uid).get();
-          setRole(userDoc.data().role);
-          navigate("/");
-        } catch (error) {
-          console.log("Error fetching user role: ", error);
-        }
-      }
+    if (currentUser) {
+      navigate("/");
     }
-
-    fetchUserRole();
   }, [currentUser, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+  
     try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      const userDoc = await db.collection("users").doc(currentUser.uid).get();
+      setRole(userDoc.data().role);
+      navigate("/");
     } catch (error) {
       console.log("Login error: ", error);
       setError("Failed to sign in");
     }
-
+    
     setLoading(false);
   }
-
 
   return (
     <Container className ="d-flex align-items-center justify-content-center"

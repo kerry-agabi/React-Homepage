@@ -20,11 +20,6 @@ export default function SignUp() {
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
     }
-  
-    if (passwordRef.current.value.length < 6) {
-      return setError("Password must be at least 6 characters long");
-    }
-  
     try {
       setError("");
       setLoading(true);
@@ -36,11 +31,9 @@ export default function SignUp() {
         role: role,
       });
       navigate("/");
-    } catch (error) {
-      console.log("SignUp error: ", error);
+    } catch {
       setError("Failed to create an account");
     }
-    
     setLoading(false);
   }
 
@@ -67,8 +60,7 @@ export default function SignUp() {
                     <option value="recruiter">Recruiter</option>
                   </Form.Control>
                 </Form.Group>
-<br>
-</br>
+
                 <Form.Group id="email">
                   <Form.Label> Email </Form.Label>
                   <Form.Control type="email" ref={emailRef} required />

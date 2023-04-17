@@ -94,63 +94,17 @@ function App() {
           </PrivateRoute>
         }
       />
-
-      <Route
-        path="/job2"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["jobseeker"]}>
-              <JobCardAlgo />
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      />
+              <Route path='/dashboard2' exact element={<PrivateRoute><DashboardSeeker /></PrivateRoute>} />
+              <Route path='/job2' exact element={<PrivateRoute><JobCardAlgo /></PrivateRoute>} />
               <Route path='/job' exact element={<Job/>} />
-
-
-              <Route
-        path="/user-guide"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <UserGuide />
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      />
-
-<Route
-        path="/update1"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <Update />
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      />
-
-<Route
-        path="/delete"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <Delete />
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      />
-             
-             <Route
-        path="/update/:id"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <UpdateJob />
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      />  
+              <Route path='/user-guide' exact element={<UserGuide/>} />
+              <Route path='/update1' element={<AdminRoute />}>
+                <Route index element={<Update />} />
+              </Route>
+              <Route path='/delete' element={<AdminRoute />}>
+                <Route index element={<Delete />} />
+              </Route>   
+              <Route path="/update/:id" element={<UpdateJob />} />
               <Route
         path="/advertise"
         element={
@@ -160,67 +114,20 @@ function App() {
             </RoleBasedElement>
           </PrivateRoute>
         }
-      />      
-
-<Route
-        path="/view"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <ViewApplications />
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      /> 
-
-<Route
-        path="/view"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <ViewApplications />
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      /> 
-
-<Route
-        path="/view2/:jobId"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <View/>
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      /> 
-
-<Route
-        path="/jobapplication/:jobId"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["jobseeker"]}>
-              <JobApplication/>
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      /> 
+      />            
+              <Route path='/view' element={<AdminRoute />}>
+                <Route index element={<ViewApplications />} />
+              </Route>
+              <Route path='/view2/:jobId' exact element={<PrivateRoute><View /></PrivateRoute>} />
+              <Route path="/jobapplication/:jobId" exact element={<PrivateRoute><JobApplication /></PrivateRoute>} />
               <Route path='/signup' exact element={<SignUp />} />
               <Route path='/login' exact element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} />
+              <Route path='/churn' element={<AdminRoute />}>
+                <Route index element={<EmployeeForm />} />
+              </Route>
 
-              <Route
-        path="/churn"
-        element={
-          <PrivateRoute>
-            <RoleBasedElement allowedRoles={["recruiter"]}>
-              <EmployeeForm/>
-            </RoleBasedElement>
-          </PrivateRoute>
-        }
-      /> 
-            
               
               
             </Routes>
